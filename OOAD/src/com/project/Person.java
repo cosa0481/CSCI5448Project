@@ -6,7 +6,6 @@ abstract public class Person {
 
 	private String firstName;
 	private String lastName;
-	private String address;
 	
 	private String username;
 	private String password;
@@ -28,12 +27,6 @@ abstract public class Person {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public String getUsername() {
 		return username;
