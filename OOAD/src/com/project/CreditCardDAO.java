@@ -1,5 +1,5 @@
 package com.project;
 
-public class CreditCardDAO {
-
+public class CreditCardDAO  {
+	private int creditCardNumber;
 }

@@ -1,6 +1,6 @@
 package com.project;
 
-public class VenmoPaymentHandler implements IpaymentMethod {
+public class VenmoPayment implements IpaymentMethod {
 
 	VenmoDAO venmoDetails;
 	

@@ -1,6 +1,6 @@
 package com.project;
 
-public class CardPaymentHandler implements IpaymentMethod {
+public class CardPayment implements IpaymentMethod {
 
 	CreditCardDAO cardDetails;
 
