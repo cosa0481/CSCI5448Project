@@ -6,8 +6,8 @@ import java.util.List;
 public class Order {
 
 	private Customer customer;
-	private Date order_date;
-	private List<Item> order_items;
+	private Date orderDate;
+	private List<Item> orderItems;
 	private float orderValue;
 	private Shipping shippingMethod;
 	private String shippingAddress;
@@ -19,16 +19,16 @@ public class Order {
 		this.customer = customer;
 	}
 	public Date getOrder_date() {
-		return order_date;
+		return orderDate;
 	}
-	public void setOrder_date(Date order_date) {
-		this.order_date = order_date;
+	public void setOrder_date(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 	public List<Item> getOrder_items() {
-		return order_items;
+		return orderItems;
 	}
-	public void setOrder_items(List<Item> order_items) {
-		this.order_items = order_items;
+	public void setOrder_items(List<Item> orderItems) {
+		this.orderItems = orderItems;
 	}
 	public float getOrderValue() {
 		return orderValue;
