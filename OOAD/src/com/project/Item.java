@@ -1,12 +1,15 @@
 package com.project;
 
 import java.util.List;
+import java.util.Date;
 
 public class Item {
 
 	int id;
 	String serial_no;
 	float suggestedRetailPrice;
+	float currentPrice;
+	Date currentPriceSet;
 	private int inInventory;
 	String title;
 	List<Sale> itemSales;
@@ -32,6 +35,10 @@ public class Item {
 		float currentPrice = suggestedRetailPrice;
 		float bestDiscount = 0;
 		return currentPrice * (1 - bestDiscount);
+	}
+	
+	public void setCurrentPrice(float currentPrice) {
+		this.currentPrice = currentPrice;
 	}
 	
 	public int getInInventory() {
@@ -80,6 +87,10 @@ public class Item {
 
 	public void setItemSales(List<Sale> itemSales) {
 		this.itemSales = itemSales;
+	}
+	
+	public void addItemSale(Date startDate, Date endDate, double percentDiscount) {
+
 	}
 
 	public Category getCategory() {
