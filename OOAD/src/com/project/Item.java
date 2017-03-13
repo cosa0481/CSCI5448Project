@@ -5,15 +5,15 @@ import java.util.Date;
 
 public class Item {
 
-	int id;
-	String serial_no;
-	float suggestedRetailPrice;
-	float currentPrice;
-	Date currentPriceSet;
+	private int id;
+	private String serial_no;
+	private float suggestedRetailPrice;
+	private float currentPrice;
+	private Date currentPriceSet;
 	private int inInventory;
-	String title;
-	List<Sale> itemSales;
-	float numStars;
+	private String title;
+	private List<Sale> itemSales;
+	private float numStars;
 
 	public float getNumStars() {
 		return numStars;

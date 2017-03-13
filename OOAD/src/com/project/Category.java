@@ -7,7 +7,7 @@ public class Category {
 	private int category_id;
 	private String name;
 	private String category_image;
-	List<Sale> categorySales;
+	private List<Sale> categorySales;
 	
 	public int getCategory_id() {
 		return category_id;
