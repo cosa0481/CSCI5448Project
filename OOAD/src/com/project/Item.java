@@ -84,6 +84,10 @@ public class Item {
 	public List<Sale> getItemSales() {
 		return itemSales;
 	}
+	
+	public List<Sale> getAllSales() {
+		return itemSales;
+	}
 
 	public void setItemSales(List<Sale> itemSales) {
 		this.itemSales = itemSales;
