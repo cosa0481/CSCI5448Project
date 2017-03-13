@@ -14,6 +14,6 @@ public class Cart {
 		this.itemCountMap = itemCountMap;
 	}
 	
-	public void addItemToCart(Item product) {
+	public void addItemToCart(Item product, int quantity) {
 	}
 }
