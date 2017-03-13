@@ -8,6 +8,10 @@ public class Shipping {
 	private int shippingDays;
 	private int shippingCost;
 	
+	public boolean initiateOrder(Order order) {
+		return false;
+	}
+	
 	public int getId() {
 		return id;
 	}

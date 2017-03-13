@@ -12,6 +12,14 @@ public class Order {
 	private Shipping shippingMethod;
 	private String shippingAddress;
 	
+	public void getOrderInfo() {
+		
+	}
+	
+	public void showOrderInfo() {
+		
+	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}

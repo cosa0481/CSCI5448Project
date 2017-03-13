@@ -7,8 +7,12 @@ public class Customer extends Person {
 	private Membership membership;
 	private Cart cart;
 
+	
 	public List<Order> getOrders() {
 		return null;
+	}
+	
+	public void addOrder(Order order) {
 	}
 
 	public Order checkout() {
