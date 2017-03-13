@@ -38,5 +38,9 @@ public class Customer extends Person {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+	
+	public IpaymentMethod getPaymentMethod(){
+		return null;
+	}
 
 }
