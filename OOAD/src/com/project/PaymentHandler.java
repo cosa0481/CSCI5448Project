@@ -2,7 +2,18 @@ package com.project;
 
 public class PaymentHandler {
 
-	 public static boolean processPayment(Order order,IpaymentMethod paymentMethod){
-		 return paymentMethod.processPayment(order);
-	 }
+	private IpaymentMethod paymentMethod;
+
+	public PaymentHandler(IpaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+		initialize();
+	}
+
+	private void initialize() {
+		paymentMethod.initializePaymentDetails();
+	}
+
+	public boolean processPayment(Order order) {
+		return paymentMethod.processPayment(order);
+	}
 }
