@@ -6,7 +6,7 @@ public class System {
 
 	private static System instance;
 	private Customer currentCustomer;
-	List<Subscriber> observers;
+	private List<Subscriber> observers;
 
 	private System() {
 	}
@@ -22,8 +22,16 @@ public class System {
 		observers.add(sub);
 	}
 	
+	public List<Subscriber> getObservers() {
+		return observers;
+	}
+	
+	public void setObservers(List<Subscriber> observerList) {
+		observers = observerList;
+	}
+	
 	public void logOrder(Order order) {
-		for(Subscriber sub : observers) {
+		for(Subscriber sub : System.getInstance().getObservers()) {
 			sub.log(order);
 		}
 	}
@@ -38,6 +46,7 @@ public class System {
 
 	static public void onSuccessfulPurchase(Order order) {
 		generateInvoice(order);
+		System.getInstance().logOrder(order);
 	}
 
 	static private void generateInvoice(Order order) {

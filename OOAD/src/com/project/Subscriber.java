@@ -1,6 +1,5 @@
 package com.project;
 
 public interface Subscriber {
-		
-	public void log(Order order);
+	public abstract void log(Order order);
 }
