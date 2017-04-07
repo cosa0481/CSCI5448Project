@@ -5,7 +5,7 @@ import java.util.List;
 public class System {
 
 	private static System instance;
-	private Customer currentCustomer;
+	private Person currentUser;
 	private List<Subscriber> observers;
 
 	private System() {
@@ -36,8 +36,12 @@ public class System {
 		}
 	}
 
-	public Customer getCurrentCustomer() {
-		return currentCustomer;
+	public Person getCurrentUser() {
+		return currentUser;
+	}
+	
+	public void setCurrentUser(Person user) {
+		currentUser = user;
 	}
 
 	static public void search(String searchString) {
