@@ -2,9 +2,9 @@
 <class-diagram version="1.1.14" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
-  <class id="1" language="java" name="com.project.Order" project="OOAD" file="/OOAD/src/com/project/Order.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="748" y="143"/>    
+  <class id="1" language="java" name="com.project.ItemSubscriber" project="OOAD" 
+    file="/OOAD/src/com/project/ItemSubscriber.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-336" y="696"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,34 +13,34 @@
   </class>  
   <class id="2" language="java" name="com.project.PrimeMembership" project="OOAD" 
     file="/OOAD/src/com/project/PrimeMembership.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="281" y="965"/>    
+    <position height="-1" width="-1" x="653" y="2396"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.project.Region" project="OOAD" file="/OOAD/src/com/project/Region.java" 
+  <class id="3" language="java" name="com.project.Customer" project="OOAD" file="/OOAD/src/com/project/Customer.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="877" y="-259"/>    
+    <position height="-1" width="-1" x="896" y="1852"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.project.Review" project="OOAD" file="/OOAD/src/com/project/Review.java" 
+  <class id="4" language="java" name="com.project.Region" project="OOAD" file="/OOAD/src/com/project/Region.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="100" y="704"/>    
+    <position height="-1" width="-1" x="1391" y="1472"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.project.BasicMembership" project="OOAD" 
-    file="/OOAD/src/com/project/BasicMembership.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="813" y="973"/>    
+  <class id="5" language="java" name="com.project.Sale" project="OOAD" file="/OOAD/src/com/project/Sale.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1352" y="1861"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,341 +49,435 @@
   </class>  
   <class id="6" language="java" name="com.project.Membership" project="OOAD" 
     file="/OOAD/src/com/project/Membership.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="535" y="760"/>    
+    <position height="-1" width="-1" x="770" y="2160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.project.Person" project="OOAD" file="/OOAD/src/com/project/Person.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="108" x="247" y="454"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="com.project.Item" project="OOAD" file="/OOAD/src/com/project/Item.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="114" y="114"/>    
+  <class id="7" language="java" name="com.project.PaymentHandler" project="OOAD" 
+    file="/OOAD/src/com/project/PaymentHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="0" y="226"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.project.Shipping" project="OOAD" file="/OOAD/src/com/project/Shipping.java" 
+  <class id="8" language="java" name="com.project.Person" project="OOAD" file="/OOAD/src/com/project/Person.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="619" y="-241"/>    
+    <position height="-1" width="-1" x="609" y="1508"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.project.VenmoDAO" project="OOAD" file="/OOAD/src/com/project/VenmoDAO.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="104" width="91" x="883" y="44"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+  <class id="9" language="java" name="com.project.VenmoPayment" project="OOAD" 
+    file="/OOAD/src/com/project/VenmoPayment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-339" y="226"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="11" language="java" name="com.project.IpaymentMethod" project="OOAD" 
-    file="/OOAD/src/com/project/IpaymentMethod.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1052" y="451"/>    
+  <class id="10" language="java" name="com.project.Seller" project="OOAD" file="/OOAD/src/com/project/Seller.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="461" y="1852"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.project.PaymentMethodFactory" project="OOAD" 
+    file="/OOAD/src/com/project/PaymentMethodFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="762" y="217"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.project.Shipping" project="OOAD" file="/OOAD/src/com/project/Shipping.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1397" y="813"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.project.OrderSubscriber" project="OOAD" 
+    file="/OOAD/src/com/project/OrderSubscriber.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-492" y="696"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="14" language="java" name="com.project.Subscriber" project="OOAD" 
+    file="/OOAD/src/com/project/Subscriber.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-28" y="1401"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="12" language="java" name="com.project.Cart" project="OOAD" file="/OOAD/src/com/project/Cart.java" 
+  <class id="15" language="java" name="com.project.VenmoDAO" project="OOAD" file="/OOAD/src/com/project/VenmoDAO.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="987" y="708"/>    
+    <position height="-1" width="-1" x="-684" y="714"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.project.Category" project="OOAD" file="/OOAD/src/com/project/Category.java" 
+  <interface id="16" language="java" name="com.project.IpaymentMethod" project="OOAD" 
+    file="/OOAD/src/com/project/IpaymentMethod.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6" y="696"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="17" language="java" name="com.project.Cart" project="OOAD" file="/OOAD/src/com/project/Cart.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="409" y="-13"/>    
+    <position height="-1" width="-1" x="1035" y="2133"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="com.project.CreditCardDAO" project="OOAD" 
-    file="/OOAD/src/com/project/CreditCardDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="262" width="190" x="1026" y="-89"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="com.project.Customer" project="OOAD" file="/OOAD/src/com/project/Customer.java" 
+  <class id="18" language="java" name="com.project.Order" project="OOAD" file="/OOAD/src/com/project/Order.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="782" y="492"/>    
+    <position height="-1" width="-1" x="1077" y="388"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="com.project.Seller" project="OOAD" file="/OOAD/src/com/project/Seller.java" 
+  <class id="19" language="java" name="com.project.Log" project="OOAD" file="/OOAD/src/com/project/Log.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="97" width="99" x="391" y="250"/>    
+    <position height="-1" width="-1" x="-366" y="1400"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="com.project.VenmoPayment" project="OOAD" 
-    file="/OOAD/src/com/project/VenmoPayment.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="956" y="297"/>    
+  <class id="20" language="java" name="com.project.System" project="OOAD" file="/OOAD/src/com/project/System.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="466" y="786"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="com.project.CardPayment" project="OOAD" 
+  <class id="21" language="java" name="com.project.Review" project="OOAD" file="/OOAD/src/com/project/Review.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="912" y="1490"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.project.BasicMembership" project="OOAD" 
+    file="/OOAD/src/com/project/BasicMembership.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="865" y="2396"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.project.UserSubscriber" project="OOAD" 
+    file="/OOAD/src/com/project/UserSubscriber.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-183" y="696"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.project.CardPayment" project="OOAD" 
     file="/OOAD/src/com/project/CardPayment.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1146" y="293"/>    
+    <position height="-1" width="-1" x="228" y="226"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="com.project.Controller" project="OOAD" 
-    file="/OOAD/src/com/project/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1128" y="-202"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="20" language="java" name="com.project.PaymentHandler" project="OOAD" 
-    file="/OOAD/src/com/project/PaymentHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1124" y="-357"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="21" language="java" name="com.project.Sale" project="OOAD" file="/OOAD/src/com/project/Sale.java" 
+  <class id="25" language="java" name="com.project.Item" project="OOAD" file="/OOAD/src/com/project/Item.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="281" width="252" x="237" y="-475"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1133" y="966"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="com.project.System" project="OOAD" file="/OOAD/src/com/project/System.java" 
+  <enumeration id="26" language="java" name="com.project.PaymentMethodFactory.Payment_Method" project="OOAD" 
+    file="/OOAD/src/com/project/PaymentMethodFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="692" y="705"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="27" language="java" name="com.project.CreditCardDAO" project="OOAD" 
+    file="/OOAD/src/com/project/CreditCardDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="105" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.project.Category" project="OOAD" file="/OOAD/src/com/project/Category.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="191" x="15" y="-424"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1144" y="1472"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="23">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="24" name="cart">        
-        <position height="0" width="0" x="143" y="167"/>      
-      </attribute>      
-      <multiplicity id="25" minimum="0" maximum="1">        
-        <position height="0" width="0" x="143" y="167"/>      
-      </multiplicity>    
+  <class id="29" language="java" name="com.project.Administrator" project="OOAD" 
+    file="/OOAD/src/com/project/Administrator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="669" y="1789"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="30">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="31" name="orderItems"/>      
+      <multiplicity id="32" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="27" name="reviewer">        
-        <position height="0" width="0" x="-13" y="148"/>      
-      </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-13" y="148"/>      
-      </multiplicity>    
+  <nesting id="33">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <association id="34">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="35" name="instance"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="29">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="30">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="31">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="32" name="from">        
-        <position height="0" width="0" x="19" y="-47"/>      
-      </attribute>      
-      <multiplicity id="33" minimum="0" maximum="1">        
-        <position height="0" width="0" x="19" y="-47"/>      
-      </multiplicity>    
+  <association id="37">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="38" name="cart"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="41" name="reviews"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <bendpoint x="800" y="648"/>    
+    <bendpoint x="800" y="1325"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="44" name="customer"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="7"/>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
-  <association id="35">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="36" name="membership">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="37" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="47">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="48" name="categorySales"/>      
+      <multiplicity id="49" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="50">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="52">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="53" name="cardDetails"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="56" name="membership"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="38">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="39" name="cardDetails">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="40" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="58">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="59" name="category"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
+    <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="41">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="42" name="to">        
-        <position height="0" width="0" x="19" y="-47"/>      
-      </attribute>      
-      <multiplicity id="43" minimum="0" maximum="1">        
-        <position height="0" width="0" x="19" y="-47"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="45" name="orderItems">        
-        <position height="0" width="0" x="2" y="-118"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="2" y="-118"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="48">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="49" name="categorySales"/>      
-      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="52" name="shippingMethod">        
-        <position height="17" width="85" x="678" y="-209"/>      
-      </attribute>      
-      <multiplicity id="53" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-80" y="-43"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="55" name="reviews">        
-        <position height="0" width="0" x="-15" y="223"/>      
-      </attribute>      
-      <multiplicity id="56" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-15" y="223"/>      
-      </multiplicity>    
+  <realization id="61">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <association id="62">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="63" name="to"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="57">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <association id="58">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="59" name="category">        
-        <position height="0" width="0" x="293" y="-28"/>      
-      </attribute>      
-      <multiplicity id="60" minimum="0" maximum="1">        
-        <position height="0" width="0" x="293" y="-28"/>      
-      </multiplicity>    
+  <association id="65">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="66" name="userLog"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="19" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="61">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="62" name="itemSales"/>      
-      <multiplicity id="63" minimum="0" maximum="2147483647"/>    
+  <generalization id="68">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="69">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="70" name="from"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="64">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="65" name="venmoDetails">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="66" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="72">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="73" name="observers"/>      
+      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="67">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="68" name="customer">        
-        <position height="0" width="0" x="-13" y="148"/>      
-      </attribute>      
-      <multiplicity id="69" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-13" y="148"/>      
-      </multiplicity>    
+  <association id="75">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="76" name="reviewer"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="79" name="venmoDetails"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="70">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="11"/>  
+  <association id="81">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="82" name="orderLog"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="84">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="14"/>  
   </realization>  
+  <association id="85">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="86" name="currentUser"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <bendpoint x="1286" y="1325"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="89" name="itemSales"/>      
+      <multiplicity id="90" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="92">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="93" name="itemLog"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="96" name="shippingMethod"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="98">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <realization id="99">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <association id="100">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="101" name="paymentMethod"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
