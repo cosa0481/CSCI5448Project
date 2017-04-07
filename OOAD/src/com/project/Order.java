@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Order {
 
+	private int orderID;
 	private Customer customer;
 	private Date orderDate;
 	private List<Item> orderItems;
@@ -18,6 +19,14 @@ public class Order {
 	
 	public void showOrderInfo() {
 		
+	}
+	
+	public int getOrderID() {
+		return orderID;
+	}
+	
+	public void setID(int newID) {
+		orderID = newID;
 	}
 	
 	public Customer getCustomer() {

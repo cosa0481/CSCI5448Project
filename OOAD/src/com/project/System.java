@@ -1,9 +1,12 @@
 package com.project;
 
+import java.util.List;
+
 public class System {
 
 	private static System instance;
 	private Customer currentCustomer;
+	List<Subscriber> observers;
 
 	private System() {
 	}
@@ -13,6 +16,16 @@ public class System {
 			instance = new System();
 		}
 		return instance;
+	}
+	
+	public void attach(Subscriber sub) {
+		observers.add(sub);
+	}
+	
+	public void logOrder(Order order) {
+		for(Subscriber sub : observers) {
+			sub.log(order);
+		}
 	}
 
 	public Customer getCurrentCustomer() {
