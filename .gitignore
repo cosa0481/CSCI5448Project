@@ -1,2 +1,4 @@
 hibernate-release-5.2.9.Final/
 mysql-connector-java-5.1.41/
+.settings/
+.classpath
