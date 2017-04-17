@@ -1,7 +1,10 @@
 package com.project;
 
+import javax.persistence.*;
+
 abstract public class Person {
 	
+	@Id
 	private int id;
 
 	private String firstName;
