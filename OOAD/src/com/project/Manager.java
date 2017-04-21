@@ -59,6 +59,6 @@ public class Manager {
 
 	// Main function
 	public static void main(String[] args) {
-		HibernateDriver.run();
+		//HibernateDriver.run();
 	}
 }
