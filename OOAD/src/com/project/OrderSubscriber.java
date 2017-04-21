@@ -15,7 +15,7 @@ public class OrderSubscriber implements Subscriber {
 	
 	public OrderSubscriber() {
 		orderLog = new Log();
-		System.getInstance().attach(this);
+		Manager.getInstance().attach(this);
 	}
 
 }

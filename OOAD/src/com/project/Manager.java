@@ -2,18 +2,18 @@ package com.project;
 
 import java.util.List;
 
-public class System {
+public class Manager {
 
-	private static System instance;
+	private static Manager instance;
 	private Person currentUser;
 	private List<Subscriber> observers;
 
-	private System() {
+	private Manager() {
 	}
 
-	public static System getInstance() {
+	public static Manager getInstance() {
 		if (instance == null) {
-			instance = new System();
+			instance = new Manager();
 		}
 		return instance;
 	}
@@ -31,7 +31,7 @@ public class System {
 	}
 	
 	public void logOrder(Order order) {
-		for(Subscriber sub : System.getInstance().getObservers()) {
+		for(Subscriber sub : Manager.getInstance().getObservers()) {
 			sub.log(order);
 		}
 	}
@@ -50,7 +50,7 @@ public class System {
 
 	static public void onSuccessfulPurchase(Order order) {
 		generateInvoice(order);
-		System.getInstance().logOrder(order);
+		Manager.getInstance().logOrder(order);
 	}
 
 	static private void generateInvoice(Order order) {
@@ -59,6 +59,6 @@ public class System {
 
 	// Main function
 	public static void main(String[] args) {
-
+		HibernateDriver.run();
 	}
 }

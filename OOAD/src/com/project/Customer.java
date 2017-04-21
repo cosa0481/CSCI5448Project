@@ -1,7 +1,10 @@
 package com.project;
 
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name="User Information")
 public class Customer extends Person {
 
 	private Membership membership;

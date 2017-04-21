@@ -15,6 +15,6 @@ public class UserSubscriber implements Subscriber {
 	
 	public UserSubscriber() {
 		userLog = new Log();
-		System.getInstance().attach(this);
+		Manager.getInstance().attach(this);
 	}
 }

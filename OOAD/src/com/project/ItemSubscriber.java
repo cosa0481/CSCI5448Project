@@ -22,6 +22,6 @@ public class ItemSubscriber implements Subscriber {
 
 	public ItemSubscriber() {
 		itemLog = new Log();
-		System.getInstance().attach(this);
+		Manager.getInstance().attach(this);
 	}
 }
