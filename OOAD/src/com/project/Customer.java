@@ -4,10 +4,13 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="User Information")
+@Table(name="Customer", 
+	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
 public class Customer extends Person {
 
+	//TODO
 	private Membership membership;
+	//TODO
 	private Cart cart;
 
 	

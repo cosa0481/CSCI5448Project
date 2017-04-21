@@ -1,18 +1,41 @@
 package com.project;
 
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import java.util.Date;
 
+@Entity
+@Table(name="Item", 
+	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
 public class Item {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false, unique=true, length=11)
 	private int id;
+	@Column(name="SERIALNO")
 	private String serial_no;
+	@Column(name="SUGGESTEDRETAILPRICE")
 	private float suggestedRetailPrice;
+	@Column(name="CURRENTPRICE")
 	private float currentPrice;
+	@Column(name="CURRENTPRICESET")
 	private Date currentPriceSet;
+	@Column(name="ININVENTORY")
 	private int inInventory;
+	@Column(name="TITLE")
 	private String title;
+	//TODO
 	private List<Sale> itemSales;
+	@Column(name="NUMSTARS")
 	private float numStars;
 
 	public float getNumStars() {
