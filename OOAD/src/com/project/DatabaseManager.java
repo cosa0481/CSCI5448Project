@@ -1,7 +1,12 @@
 package com.project;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import com.hibernate.HibernateUtil;
 
@@ -45,9 +50,13 @@ public class DatabaseManager {
 		return session.getTransaction().wasCommitted();
 	}
 	
-	public Object retrieve() {
-		Object object = new Object();
-		return object;
+	public List<Object> retrieve(Class c, List<Criterion> criterions) {
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(c);
+		for(Criterion criterion : criterions) {
+			criteria.add(criterion);
+		}
+		return criteria.list();
 	}
 	
 	public void closeSession() {
