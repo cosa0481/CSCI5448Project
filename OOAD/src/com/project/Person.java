@@ -4,7 +4,10 @@ import javax.persistence.*;
 
 abstract public class Person {
 	
+	//TODO
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false, unique=true)
 	private int id;
 
 	private String firstName;
@@ -45,6 +48,7 @@ abstract public class Person {
 	}
 	
 	public boolean login(String userName, String password) {
+		//TODO
 		return false;
 	}
 }

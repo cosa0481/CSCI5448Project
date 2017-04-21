@@ -1,12 +1,26 @@
 package com.project;
 
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity
+@Table(name="Review")
 public class Review {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false, unique=true)
 	private int reviewId;
+	
+	//TODO
 	private Customer reviewer;
+	
+	@Column(name="DATE")
 	private Date createdDate;
+	
+	@Column(name="CONTENT")
 	private String postContent;
+	
+	@Column(name="STARS")
 	private float numStars;
 	
 	public int getReviewId() {

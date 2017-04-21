@@ -21,13 +21,11 @@ public class Region {
 	@Column(name="TITLE", length=20, nullable=true)
 	private String title;
 
-
 	@Column(name="ZIPCODE", length=20, nullable=true)
 	private int zipcode;
 	
-
-	@Column(name="STATECODE", length=20, nullable=true)
-	private String stateCode;
+	@Column(name="STATE", length=20, nullable=true)
+	private String state;
 	
 	public int getId() {
 		return id;
@@ -47,11 +45,11 @@ public class Region {
 	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getStateCode() {
-		return stateCode;
+	public String getState() {
+		return state;
 	}
-	public void setStateCode(String stateCode) {
-		this.stateCode = stateCode;
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }

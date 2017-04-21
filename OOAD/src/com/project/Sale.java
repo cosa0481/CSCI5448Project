@@ -3,9 +3,24 @@ package com.project;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Sale")
 public class Sale {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false, unique=true)
+	private int id;
+	
+	@Column(name="STARTDATE")
 	private Date startDate;
+	
+	@Column(name="ENDDATE")
 	private Date endDate;
+	
+	@Column(name="DISCOUNT")
 	private double percentDiscount;
 	
 	public Sale(Date startDate, Date endDate, double percentDiscount) {

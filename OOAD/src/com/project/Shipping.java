@@ -1,14 +1,30 @@
 package com.project;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Shipping")
 public class Shipping {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false, unique=true)
 	private int id;
+	
+	//TODO
 	private Region from;
+	
+	//TODO
 	private Region to;
+	
+	@Column(name="DAYS")
 	private int shippingDays;
+	
+	@Column(name="COST")
 	private int shippingCost;
 	
 	public boolean initiateOrder(Order order) {
+		//TODO
 		return false;
 	}
 	

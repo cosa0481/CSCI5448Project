@@ -3,22 +3,41 @@ package com.project;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Order")
 public class Order {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false, unique=true)
 	private int orderID;
+	
+	//TODO
 	private Customer customer;
+	
+	@Column(name="DATE")
 	private Date orderDate;
+	
+	//TODO
 	private List<Item> orderItems;
+	
+	@Column(name="ORDERVALUE")
 	private float orderValue;
+	
+	//TODO
 	private Shipping shippingMethod;
+	
+	@Column(name="SHIPPINGADDRESS")
 	private String shippingAddress;
 	
 	public void getOrderInfo() {
-		
+		//TODO
 	}
 	
 	public void showOrderInfo() {
-		
+		//TODO
 	}
 	
 	public int getOrderID() {
