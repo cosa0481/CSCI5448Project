@@ -20,6 +20,7 @@ public class DatabaseManager {
 		session = sessionFactory.getCurrentSession();
 	}
 	
+	
 	public static DatabaseManager getInstance() {
 		if(instance == null) {
 			instance = new DatabaseManager();
@@ -36,6 +37,7 @@ public class DatabaseManager {
 	}
 	
 	public Session getSession() {
+		session = sessionFactory.openSession();
 		return session;
 	}
 	
@@ -44,22 +46,31 @@ public class DatabaseManager {
 	}
 	
 	public boolean insert(Object object) {
-		session.beginTransaction();
-		session.saveOrUpdate(object);
-		session.getTransaction().commit();
-		return session.getTransaction().wasCommitted();
+		try{
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.saveOrUpdate(object);
+			session.getTransaction().commit();
+			return session.getTransaction().wasCommitted();
+		}finally{
+			closeSession();
+		}
 	}
 	
 	public List<Object> retrieve(Class c, List<Criterion> criterions) {
-		session.beginTransaction();
-		Criteria criteria = session.createCriteria(c);
-		for(Criterion criterion : criterions) {
-			criteria.add(criterion);
+		try{
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(c);
+			for(Criterion criterion : criterions) {
+				criteria.add(criterion);
+			}
+			return criteria.list();
+		}finally{
+			closeSession();
 		}
-		return criteria.list();
 	}
 	
 	public void closeSession() {
-		sessionFactory.close();
+		session.close();
 	}
 }

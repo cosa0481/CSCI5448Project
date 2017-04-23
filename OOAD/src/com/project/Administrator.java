@@ -13,10 +13,6 @@ import javax.persistence.UniqueConstraint;
 	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
 public class Administrator extends Person {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true, length=11)
-	private int id;
 	
 	// Pointless comment to move file
 	public void addSale(Sale sale, Category category) {

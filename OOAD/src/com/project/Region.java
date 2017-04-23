@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 public class Region {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID", nullable=false, unique=true, length=11)
 	private int id;
 	

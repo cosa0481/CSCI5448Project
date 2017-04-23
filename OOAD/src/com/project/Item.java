@@ -7,36 +7,58 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import java.util.Date;
 
 @Entity
 @Table(name="Item", 
-	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+	   uniqueConstraints={@UniqueConstraint(columnNames={"item_id"})})
 public class Item {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true, length=11)
+	@Column(name="item_id", nullable=false, unique=true, length=11)
 	private int id;
+	
 	@Column(name="SERIALNO")
 	private String serial_no;
+	
 	@Column(name="SUGGESTEDRETAILPRICE")
 	private float suggestedRetailPrice;
+	
 	@Column(name="CURRENTPRICE")
 	private float currentPrice;
+	
+	@Temporal(TemporalType.DATE)
 	@Column(name="CURRENTPRICESET")
 	private Date currentPriceSet;
+	
 	@Column(name="ININVENTORY")
 	private int inInventory;
+	
 	@Column(name="TITLE")
 	private String title;
-	//TODO
-	private List<Sale> itemSales;
+	
+	@ManyToOne
+	@JoinColumn(name="category_id", nullable=false)
+	Category category;
+
 	@Column(name="NUMSTARS")
 	private float numStars;
+
+	@Transient
+	List<Review> reviews;
+	//TODO
+	@Transient
+	private List<Sale> itemSales;
+	
 
 	public float getNumStars() {
 		return numStars;
@@ -46,9 +68,6 @@ public class Item {
 		this.numStars = numStars;
 	}
 
-	Category category;
-	List<Review> reviews;
-	
 	public void addReview(Review review) {
 	}
 	

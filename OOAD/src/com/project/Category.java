@@ -8,25 +8,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import java.util.Date;
 
 @Entity
 @Table(name="Category", 
-	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+	   uniqueConstraints={@UniqueConstraint(columnNames={"category_id"})})
 public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true, length=11)
+	@Column(name="category_id", nullable=false, unique=true, length=11)
 	private int category_id;
 
 	@Column(name="NAME")
 	private String name;
 
-	@Column(name="IMAGE")
-	private String category_image;
 	//TODO
+	@Transient
 	private List<Sale> categorySales;
 	
 	public int getCategory_id() {
@@ -41,12 +41,7 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCategory_image() {
-		return category_image;
-	}
-	public void setCategory_image(String category_image) {
-		this.category_image = category_image;
-	}
+
 	public List<Sale> getCategorySales() {
 		return categorySales;
 	}

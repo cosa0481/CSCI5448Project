@@ -21,6 +21,7 @@ public abstract class Membership {
 	private int id;
 	@Column(name="TYPE")
 	private String type;
+
 	@Column(name="GETMEMBERSHIPDISCOUNT")
 	abstract float getMembershipDiscount();
 	@Column(name="GETSHIPPINGCOST")

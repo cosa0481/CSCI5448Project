@@ -1,16 +1,30 @@
 package com.project;
 
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cascade;
+
 
 @Entity
-@Table(name="Customer", 
-	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+@Table(name="Customer")
+@AttributeOverride(name="id", column=@Column(name="customer_id"))
 public class Customer extends Person {
 
 	//TODO
+	@Transient
 	private Membership membership;
-	//TODO
+
+	@OneToOne( mappedBy="customer",cascade={CascadeType.ALL})
 	private Cart cart;
 
 	

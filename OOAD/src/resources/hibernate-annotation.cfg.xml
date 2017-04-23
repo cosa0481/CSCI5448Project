@@ -9,11 +9,18 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/ooad</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">root</property>
+		  <property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
 		<property name="hibernate.current_session_context_class">thread</property>
 		
 		<!-- Mapping with model class containing annotations -->
 		<mapping class="com.project.Region"/>
+		<mapping class="com.project.Seller"/>
+		<mapping class="com.project.Customer"/>
+		<mapping class="com.project.Item"/>
+		<mapping class="com.project.Cart"/>
+		<mapping class="com.project.Category"/>
+
 	</session-factory>
 </hibernate-configuration>

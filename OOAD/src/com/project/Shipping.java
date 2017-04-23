@@ -10,11 +10,13 @@ public class Shipping {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false, unique=true)
 	private int id;
-	
-	//TODO
+
+    @OneToOne
+    @JoinColumn(name="region_id")
 	private Region from;
 	
-	//TODO
+    @OneToOne
+    @JoinColumn(name="region_id")
 	private Region to;
 	
 	@Column(name="DAYS")

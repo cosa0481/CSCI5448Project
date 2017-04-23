@@ -2,6 +2,7 @@ package com.project;
 
 import javax.persistence.*;
 
+@MappedSuperclass
 abstract public class Person {
 	
 	//TODO
@@ -10,10 +11,16 @@ abstract public class Person {
 	@Column(name="ID", nullable=false, unique=true)
 	private int id;
 
+	@Column(name="firstName", length=20, nullable=true)
 	private String firstName;
+	
+	@Column(name="lastName", length=20, nullable=true)
 	private String lastName;
 	
+	@Column(name="username", length=20, nullable=true)
 	private String username;
+	
+	@Column(name="password", length=20, nullable=true)
 	private String password;
 	
 	public int getId() {
