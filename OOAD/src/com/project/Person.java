@@ -5,7 +5,6 @@ import javax.persistence.*;
 @MappedSuperclass
 abstract public class Person {
 	
-	//TODO
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false, unique=true)

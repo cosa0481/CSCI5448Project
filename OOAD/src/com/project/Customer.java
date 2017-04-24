@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cascade;
 
 
 @Entity
-@Table(name="Customer")
+@Table(name="customer")
 @AttributeOverride(name="id", column=@Column(name="customer_id"))
 public class Customer extends Person {
 

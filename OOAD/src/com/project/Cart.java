@@ -3,6 +3,7 @@ package com.project;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -24,7 +25,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name = "Cart", uniqueConstraints = { @UniqueConstraint(columnNames = { "cart_id" }) })
+@Table(name = "cart", uniqueConstraints = { @UniqueConstraint(columnNames = { "cart_id" }) })
 public class Cart {
 
 	@Id
@@ -38,7 +39,7 @@ public class Cart {
 	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "cart_id"))
 	private Map<Item, Integer> itemCountMap;
 
-	@OneToOne
+	@OneToOne(optional=false,cascade={CascadeType.REFRESH})
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 	

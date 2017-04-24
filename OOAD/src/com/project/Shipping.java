@@ -3,20 +3,20 @@ package com.project;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Shipping")
+@Table(name="shipping")
 public class Shipping {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true)
+	@Column(name="shipping_id", nullable=false, unique=true)
 	private int id;
 
-    @OneToOne
-    @JoinColumn(name="region_id")
+    @ManyToOne(optional=false)
+    @JoinColumn(referencedColumnName="region_id",name="from_region")
 	private Region from;
 	
-    @OneToOne
-    @JoinColumn(name="region_id")
+    @ManyToOne(optional=false)
+    @JoinColumn(referencedColumnName="region_id",name="to_region")
 	private Region to;
 	
 	@Column(name="DAYS")

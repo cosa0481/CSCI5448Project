@@ -1,20 +1,23 @@
 package com.project;
 
 import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="Review")
+@Table(name="review")
 public class Review {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true)
+	@Column(name="review_id", nullable=false, unique=true)
 	private int reviewId;
 	
-	//TODO
+	@ManyToOne
+	@JoinColumn(name="customer_id", nullable=false)
 	private Customer reviewer;
 	
 	@Column(name="DATE")
+	@Temporal(TemporalType.DATE)
 	private Date createdDate;
 	
 	@Column(name="CONTENT")

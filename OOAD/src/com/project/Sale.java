@@ -6,17 +6,19 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Sale")
+@Table(name="sale")
 public class Sale {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true)
+	@Column(name="sale_id", nullable=false, unique=true)
 	private int id;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="STARTDATE")
 	private Date startDate;
-	
+
+	@Temporal(TemporalType.DATE)
 	@Column(name="ENDDATE")
 	private Date endDate;
 	

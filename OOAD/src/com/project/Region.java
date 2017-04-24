@@ -9,13 +9,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="Region", 
-	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+@Table(name="region", 
+	   uniqueConstraints={@UniqueConstraint(columnNames={"region_id"})})
 public class Region {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID", nullable=false, unique=true, length=11)
+	@Column(name="region_id", nullable=false, unique=true, length=11)
 	private int id;
 	
 	@Column(name="TITLE", length=20, nullable=true)

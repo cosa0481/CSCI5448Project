@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Seller")
+@Table(name="seller")
 public class Seller extends Person {
 
 	@Column(name="sellerRating", length=20, nullable=true)

@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +20,7 @@ import javax.persistence.UniqueConstraint;
 import java.util.Date;
 
 @Entity
-@Table(name="Item", 
+@Table(name="item", 
 	   uniqueConstraints={@UniqueConstraint(columnNames={"item_id"})})
 public class Item {
 
@@ -53,10 +55,12 @@ public class Item {
 	@Column(name="NUMSTARS")
 	private float numStars;
 
-	@Transient
+	@OneToMany
+	@JoinTable(name = "item_reviews", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "item_id") }, inverseJoinColumns = { @JoinColumn(name = "review_id", referencedColumnName = "review_id", unique = true) })
 	List<Review> reviews;
-	//TODO
-	@Transient
+	
+	@OneToMany
+	@JoinTable(name = "item_sales", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "item_id") }, inverseJoinColumns = { @JoinColumn(name = "sale_id", referencedColumnName = "sale_id", unique = true) })
 	private List<Sale> itemSales;
 	
 
@@ -69,6 +73,7 @@ public class Item {
 	}
 
 	public void addReview(Review review) {
+		reviews.add(review);
 	}
 	
 	public float getCurrentPrice() {

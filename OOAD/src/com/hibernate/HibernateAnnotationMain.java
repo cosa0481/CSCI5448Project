@@ -2,21 +2,27 @@ package com.hibernate;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.hibernate.*;
-import org.hibernate.criterion.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.sql.Select;
 
 import com.project.Cart;
 import com.project.Category;
 import com.project.Customer;
 import com.project.DatabaseManager;
 import com.project.Item;
+import com.project.Order;
 import com.project.Region;
+import com.project.Review;
 import com.project.Seller;
+import com.project.Shipping;
 
 public class HibernateAnnotationMain {
 
@@ -134,7 +140,7 @@ public class HibernateAnnotationMain {
 		//Commit transaction
 		session.getTransaction().commit();
 		System.out.println("Customer ID="+c.getId());*/
-		List<Criterion> criteria = new ArrayList<Criterion>();
+/*		List<Criterion> criteria = new ArrayList<Criterion>();
 		
 		List<Object> l = DatabaseManager.getInstance().retrieve(Customer.class, criteria);
 
@@ -146,7 +152,153 @@ public class HibernateAnnotationMain {
 		DatabaseManager.getInstance().closeSession();
 		
 		DatabaseManager.getInstance().insert(c);
-		DatabaseManager.getInstance().getSessionFactory().close();
+		DatabaseManager.getInstance().getSessionFactory().close();*/
+		
+		createData();
+	}
+	
+	public static void createData(){
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		Session session = sessionFactory.getCurrentSession();
+		//start transaction
+		session.beginTransaction();
+		
+		Region region1 = new Region();
+		region1.setState("CO");
+		region1.setTitle("UCB");
+		region1.setZipcode(80204);
+		session.save(region1);
+		
+		
+		Region region2 = new Region();
+		region2.setState("CO");
+		region2.setTitle("Glenlake");
+		region2.setZipcode(80301);
+		session.save(region2);
+		
+		Shipping shippping1 = new Shipping();
+		shippping1.setFrom(region1);
+		shippping1.setTo(region2);
+		shippping1.setShippingCost(100);
+		shippping1.setShippingDays(7);
+		session.save(shippping1);
+
+		
+		Category category1 = new Category();
+		category1.setName("phone");
+		session.save(category1);
+		
+		Category category2 = new Category();
+		category2.setName("book");
+		session.save(category2);
+
+		Item i = new Item();
+		i.setCategory(category1);
+		i.setCurrentPrice(50.0f);
+		i.setInInventory(10);
+		i.setNumStars(3);
+		i.setTitle("Nokia phone");
+		i.setSerial_no("1234");
+		session.save(i);
+
+		Item i2 = new Item();
+		i2.setCategory(category2);
+		i2.setCurrentPrice(50.0f);
+		i2.setInInventory(10);
+		i2.setNumStars(3);
+		i2.setTitle("Crime and Punishment");
+		i2.setSerial_no("1234");
+		session.save(i2);
+
+		HashMap<Item, Integer> itemCountMap = new HashMap<>();
+		itemCountMap.put(i, 2);
+		itemCountMap.put(i2, 4);
+		
+		
+		Customer c = new Customer();
+		c.setFirstName("Rohit");
+		c.setLastName("Gupta");
+		c.setUsername("abcd");
+		c.setPassword("abcd");
+		session.save(c);
+
+		System.out.println(c.getCart());
+		
+		Cart cart = new Cart();
+		cart.setItemCountMap(itemCountMap);
+		cart.setCustomer(c);
+		session.save(cart);
+		
+		//session.refresh(c);
+
+		System.out.println(c.getCart());
+		
+		
+		Review r1 = new Review();
+		r1.setNumStars(4);
+		r1.setPostContent("review for phone");
+		r1.setReviewer(c);
+		r1.setCreatedDate(new Date());
+		session.save(r1);
+
+		Review r2 = new Review();
+		r2.setNumStars(3);
+		r2.setPostContent("review for book");
+		r2.setReviewer(c);
+		r2.setCreatedDate(new Date());
+		session.save(r2);
+
+		List<Review> reviews = new ArrayList<>();
+		reviews.add(r1);
+		reviews.add(r2);
+		
+		i2.setReviews(reviews);
+		
+		reviews = new ArrayList<>();
+		reviews.add(r1);
+		
+		i.setReviews(reviews);
+		
+		session.save(i);
+		session.save(i2);
+		
+		Order o1 = new Order();
+		o1.setCustomer(c);
+		o1.setOrder_date(new Date());
+		o1.setOrderValue(120);
+		o1.setShippingMethod(shippping1);
+		o1.setShippingAddress("address for order 1");
+		
+		List<Item> items = new ArrayList<>();
+		items.add(i);
+		o1.setOrder_items(items);
+		
+		session.save(o1);
+		
+		Order o2 = new Order();
+		o2.setCustomer(c);
+		o2.setOrder_date(new Date());
+		o2.setOrderValue(120);
+		o2.setShippingMethod(shippping1);
+		o2.setShippingAddress("address for order 1");
+		
+		items = new ArrayList<>();
+		items.add(i);
+		items.add(i2);
+		o2.setOrder_items(items);
+		
+		session.save(o2);
+		
+		
+		Seller s= new Seller();
+		c.setFirstName("seller");
+		c.setLastName("seller");
+		c.setUsername("seller");
+		c.setPassword("seller");
+		session.save(s);
+		
+		sessionFactory.close();
+		
 	}
 
 }

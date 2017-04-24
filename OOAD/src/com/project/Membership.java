@@ -7,24 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@Entity
-@Table(name="Membership", 
-	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+@MappedSuperclass
 public abstract class Membership {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true, length=11)
+	@Column(name="membership_id", nullable=false, unique=true, length=11)
 	private int id;
+	
 	@Column(name="TYPE")
 	private String type;
 
-	@Column(name="GETMEMBERSHIPDISCOUNT")
 	abstract float getMembershipDiscount();
-	@Column(name="GETSHIPPINGCOST")
+
 	abstract int getShippingCost();
 	//TODO
 	abstract List<Item> getDeals();

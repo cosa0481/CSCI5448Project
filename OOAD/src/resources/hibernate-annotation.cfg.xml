@@ -18,9 +18,15 @@
 		<mapping class="com.project.Region"/>
 		<mapping class="com.project.Seller"/>
 		<mapping class="com.project.Customer"/>
+		<mapping class="com.project.Administrator"/>
+		<mapping class="com.project.Order"/>
+		<mapping class="com.project.Sale"/>
+		<mapping class="com.project.Shipping"/>
 		<mapping class="com.project.Item"/>
 		<mapping class="com.project.Cart"/>
+		<mapping class="com.project.Review"/>
 		<mapping class="com.project.Category"/>
-
+		<mapping class="com.project.VenmoDAO"/>
+		<mapping class="com.project.CreditCardDAO"/>
 	</session-factory>
 </hibernate-configuration>

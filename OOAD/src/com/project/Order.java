@@ -6,27 +6,32 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Order")
+@Table(name="customer_order")
 public class Order {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, unique=true)
+	@Column(name="order_id", nullable=false, unique=true)
 	private int orderID;
-	
-	//TODO
+
+	@ManyToOne
+	@JoinColumn(name="customer_id", nullable=false)
 	private Customer customer;
 	
-	@Column(name="DATE")
+	@Column(name="orderDate")
+	@Temporal(TemporalType.DATE)
 	private Date orderDate;
 	
-	//TODO
+	@ManyToMany
+	@JoinTable(name = "order_items", joinColumns = { @JoinColumn(name = "order_id", referencedColumnName = "order_id") }, 
+	inverseJoinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "item_id") })
 	private List<Item> orderItems;
 	
 	@Column(name="ORDERVALUE")
 	private float orderValue;
-	
-	//TODO
+
+	@ManyToOne
+	@JoinColumn(name="shipping_id",nullable=false)
 	private Shipping shippingMethod;
 	
 	@Column(name="SHIPPINGADDRESS")
