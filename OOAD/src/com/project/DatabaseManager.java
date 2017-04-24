@@ -45,7 +45,7 @@ public class DatabaseManager {
 		session = s;
 	}
 	
-	public boolean insert(Object object) {
+	public boolean saveOrUpdate(Object object) {
 		try{
 			session = sessionFactory.openSession();
 			session.beginTransaction();

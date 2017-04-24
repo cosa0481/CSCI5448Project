@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -27,6 +28,7 @@ import com.project.Shipping;
 public class HibernateAnnotationMain {
 
 	public static void main(String[] args) {
+	/*
 		Region region = new Region();
 		region.setState("CO");
 		region.setTitle("UCB");
@@ -80,13 +82,15 @@ public class HibernateAnnotationMain {
 		
 		sessionFactory.close();*/
 		
-		//Get Session
-/*		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		//Get Session*	
+	
+		/*
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
 		Session session = sessionFactory.getCurrentSession();
 		//start transaction
 		session.beginTransaction();
 		
-		
+	
 		Category category = new Category();
 		category.setName("phone");
 		session.save(category);
@@ -116,44 +120,52 @@ public class HibernateAnnotationMain {
 		
 		
 		Customer c = new Customer();
-
-		Cart cart = new Cart();
-		cart.setItemCountMap(itemCountMap);
-		cart.setCustomer(c);
-		session.save(cart);
-
-		
 		c.setFirstName("Rohit");
 		c.setLastName("Gupta");
 		c.setUsername("abcd");
 		c.setPassword("abcd");
-		c.setCart(cart);
 		
 		session.save(c);
 
+		Cart cart = new Cart();
+		cart.setItemCountMap(itemCountMap);
+		cart.setCustomer(c);
+		c.setCart(cart);
 
+		session.save(cart);
+
+		
+
+		session.getTransaction().commit();
 		//Save the Model object
 		
 		//Commit transaction
 	
 
 		//Commit transaction
-		session.getTransaction().commit();
-		System.out.println("Customer ID="+c.getId());*/
-/*		List<Criterion> criteria = new ArrayList<Criterion>();
+		System.out.println("Customer ID="+c.getId());
+	
+		 session = sessionFactory.getCurrentSession();
+		session.beginTransaction();
+		List<Criterion> criteria = new ArrayList<Criterion>();
 		
-		List<Object> l = DatabaseManager.getInstance().retrieve(Customer.class, criteria);
+		Criteria crit_1 =  session.createCriteria(Customer.class);
+		List<Object> l = crit_1.list();
 
-		Customer c= (Customer) l.get(0);
+		 c= (Customer) l.get(0);
 		
 		Map<Item, Integer> map =  c.getCart().getItemCountMap();
 		Set<Item> itemSet = map.keySet();
 		c.getCart().addItemToCart(itemSet.iterator().next(), 10);
-		DatabaseManager.getInstance().closeSession();
+
+		session.saveOrUpdate(c);
+		session.getTransaction().commit();
+		sessionFactory.close();
 		
-		DatabaseManager.getInstance().insert(c);
-		DatabaseManager.getInstance().getSessionFactory().close();*/
+		//DatabaseManager.getInstance().saveOrUpdate(c);
 		
+		//DatabaseManager.getInstance().getSessionFactory().close();
+		//;*/
 		createData();
 	}
 	
@@ -229,14 +241,14 @@ public class HibernateAnnotationMain {
 		cart.setCustomer(c);
 		session.save(cart);
 		
+		
 		//session.refresh(c);
-
 		System.out.println(c.getCart());
 		
 		
 		Review r1 = new Review();
 		r1.setNumStars(4);
-		r1.setPostContent("review for phone");
+		r1.setPostContent("review for book");
 		r1.setReviewer(c);
 		r1.setCreatedDate(new Date());
 		session.save(r1);
@@ -254,8 +266,16 @@ public class HibernateAnnotationMain {
 		
 		i2.setReviews(reviews);
 		
+		
+		Review r3 = new Review();
+		r3.setNumStars(3);
+		r3.setPostContent("review for phone");
+		r3.setReviewer(c);
+		r3.setCreatedDate(new Date());
+		session.save(r3);
+
 		reviews = new ArrayList<>();
-		reviews.add(r1);
+		reviews.add(r3);;
 		
 		i.setReviews(reviews);
 		
@@ -296,6 +316,8 @@ public class HibernateAnnotationMain {
 		c.setUsername("seller");
 		c.setPassword("seller");
 		session.save(s);
+		
+		session.getTransaction().commit();
 		
 		sessionFactory.close();
 		

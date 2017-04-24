@@ -39,7 +39,7 @@ public class Cart {
 	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "cart_id"))
 	private Map<Item, Integer> itemCountMap;
 
-	@OneToOne(optional=false,cascade={CascadeType.REFRESH})
+	@OneToOne(optional=false)
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 	
