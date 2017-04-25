@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 import org.hibernate.Session;
 
@@ -98,8 +99,9 @@ public class Manager {
 		Administrator a = (Administrator) loginUser(Administrator.class);
 
 		if (a != null) {
-			System.out
-					.println("Login succesful, Welcome " + a.getFirstName());
+			System.out.println("Login succesful, Welcome " + a.getFirstName());
+		} else {
+			System.out.println("Incorrect Login, Please try again");
 		}
 	}
 
@@ -107,8 +109,9 @@ public class Manager {
 		Seller s = (Seller) loginUser(Seller.class);
 
 		if (s != null) {
-			System.out
-					.println("Login succesful, Welcome " + s.getFirstName());
+			System.out.println("Login succesful, Welcome " + s.getFirstName());
+		} else {
+			System.out.println("Incorrect Login, Please try again");
 		}
 	}
 
@@ -116,10 +119,13 @@ public class Manager {
 		Customer c = (Customer) loginUser(Customer.class);
 
 		if (c != null) {
-			System.out
-					.println("Login succesful, Welcome " + c.getFirstName());
-			Session s = DatabaseManager.getInstance().getSession();
-			s.update(c);
+			System.out.println("Login succesful, Welcome " + c.getFirstName());
+
+			String input = showPromptForInput(
+					"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 0 to quit\n",
+					"0,1,2,3");
+		} else {
+			System.out.println("Incorrect Login, Please try again");
 		}
 	}
 
