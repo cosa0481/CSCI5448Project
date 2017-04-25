@@ -1,12 +1,6 @@
 package com.project;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Scanner;
-import java.util.logging.Level;
-
-import org.hibernate.Session;
 
 import com.utility.DisplayUtilities;
 import com.utility.Utility;
@@ -99,6 +93,10 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * 
+	 * entry point for administrator
+	 */
 	private static void handleAdministrator() {
 		Administrator a = (Administrator) loginUser(Administrator.class);
 
@@ -109,6 +107,10 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * 
+	 * entry point for seller
+	 */
 	private static void handleSeller() {
 		Seller s = (Seller) loginUser(Seller.class);
 
@@ -119,6 +121,9 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * Entry point for customer
+	 */
 	private static void handleCustomer() {
 		Customer c = (Customer) loginUser(Customer.class);
 
@@ -131,7 +136,12 @@ public class Manager {
 							"0,1,2,3");
 			
 			if (input.equals("1")) {
-
+				input = Utility
+						.showPromptForInput(
+								"Enter keywod for search",
+								"");
+				List<Item> foundItems = Item.searchItems(input);
+				DisplayUtilities.displayItems(foundItems);
 			}
 			if (input.equals("2")) {
 
