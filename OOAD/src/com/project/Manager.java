@@ -8,6 +8,8 @@ import java.util.logging.Level;
 
 import org.hibernate.Session;
 
+import com.utility.Utility;
+
 public class Manager {
 
 	private static Manager instance;
@@ -73,14 +75,15 @@ public class Manager {
 	// Main function
 	public static void main(String[] args) {
 
-		showPromptForInput("Welcome to marketplace, Press any key to continue",
-				"");
-		String user_input = showPromptForInput(
-				"Please select user type\nPress 1 for Customer\nPress 2 for Seller\nPress 3 for Administrator",
-				"1,2,3");
+		Utility.showPromptForInput(
+				"Welcome to marketplace, Press any key to continue", "");
+		String user_input = Utility
+				.showPromptForInput(
+						"Please select user type\nPress 1 for Customer\nPress 2 for Seller\nPress 3 for Administrator",
+						"1,2,3");
 
 		processUserTypeInput(user_input);
-		displayToScreen("Bye");
+		Utility.displayToScreen("Bye");
 	}
 
 	private static void processUserTypeInput(String user_input) {
@@ -121,75 +124,21 @@ public class Manager {
 		if (c != null) {
 			System.out.println("Login succesful, Welcome " + c.getFirstName());
 
-			String input = showPromptForInput(
-					"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 0 to quit\n",
-					"0,1,2,3");
+			String input = Utility
+					.showPromptForInput(
+							"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 0 to quit\n",
+							"0,1,2,3");
 		} else {
 			System.out.println("Incorrect Login, Please try again");
 		}
 	}
 
 	public static Object loginUser(Class c) {
-		String credentials = showPromptForInput(
+		String credentials = Utility.showPromptForInput(
 				"Please enter userName and Password separatedby whitespace!",
 				"");
 		String[] login_credentials = credentials.split(" ");
 		return Person.login(login_credentials[0], login_credentials[1], c);
 	}
 
-	/**
-	 * Validate UserInput against accepted values
-	 * 
-	 * @param user_input
-	 * @param accepted_valued
-	 * @return
-	 */
-	public static boolean validateInput(String user_input,
-			String accepted_valued) {
-
-		if (accepted_valued.equals("")) {
-			return true;
-		}
-
-		if (user_input == null || user_input.equals("")) {
-			return false;
-		}
-
-		String[] inputOptions = accepted_valued.split(",");
-
-		for (String inputOption : inputOptions) {
-			if (inputOption.equals(user_input)) {
-				return true;
-			}
-		}
-		return false;
-
-	}
-
-	/**
-	 * Take user's input and validate
-	 * 
-	 * @param prompt
-	 * @param accepetedValues
-	 * @return
-	 */
-	public static String showPromptForInput(String prompt,
-			String accepetedValues) {
-		Scanner reader = new Scanner(System.in); // Reading from System.in
-		String input = "";
-		do {
-			displayToScreen(prompt);
-			input = reader.nextLine().trim();
-		} while (!validateInput(input, accepetedValues));
-		return input;
-	}
-
-	/**
-	 * Show message on screen
-	 * 
-	 * @param msg
-	 */
-	public static void displayToScreen(String msg) {
-		System.out.println(msg);
-	}
 }
