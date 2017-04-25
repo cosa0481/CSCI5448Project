@@ -1,12 +1,20 @@
 package com.project;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Manager {
 
 	private static Manager instance;
+
 	private Person currentUser;
+	private UserType currentUserType;
+	
 	private List<Subscriber> observers;
+
+	public enum UserType {
+		CUSTOMER, SELLER, ADMINISTRATOR
+	};
 
 	private Manager() {
 	}
@@ -17,21 +25,21 @@ public class Manager {
 		}
 		return instance;
 	}
-	
+
 	public void attach(Subscriber sub) {
 		observers.add(sub);
 	}
-	
+
 	public List<Subscriber> getObservers() {
 		return observers;
 	}
-	
+
 	public void setObservers(List<Subscriber> observerList) {
 		observers = observerList;
 	}
-	
+
 	public void logOrder(Order order) {
-		for(Subscriber sub : Manager.getInstance().getObservers()) {
+		for (Subscriber sub : Manager.getInstance().getObservers()) {
 			sub.log(order);
 		}
 	}
@@ -39,7 +47,7 @@ public class Manager {
 	public Person getCurrentUser() {
 		return currentUser;
 	}
-	
+
 	public void setCurrentUser(Person user) {
 		currentUser = user;
 	}
@@ -59,6 +67,92 @@ public class Manager {
 
 	// Main function
 	public static void main(String[] args) {
-		//HibernateDriver.run();
+
+		showPromptForInput("Welcome to marketplace, Press any key to continue",
+				"");
+		String user_input = showPromptForInput(
+				"Please select user type\nPress 1 for Customer\nPress 2 for Seller\nPress 3 for Administrator",
+				"1,2,3");
+		
+		processUserTypeInput(user_input);
+		displayToScreen("Bye");
+	}
+
+
+	private static void processUserTypeInput(String user_input) {
+		if(user_input.equals("1")){
+			handleCustomer();
+		}
+		if(user_input.equals("2")){
+			handleSeller();
+		}
+		if(user_input.equals("3")){
+			handleAdministrator();
+		}
+	}
+
+	private static void handleAdministrator() {
+		
+	}
+
+	private static void handleSeller() {
+		
+	}
+
+	private static void handleCustomer() {
+		
+	}
+
+	/**
+	 * Validate UserInput against accepted values
+	 * @param user_input
+	 * @param accepted_valued
+	 * @return
+	 */
+	public static boolean validateInput(String user_input,
+			String accepted_valued) {
+
+		if (accepted_valued.equals("")) {
+			return true;
+		}
+
+		if (user_input == null || user_input.equals("")) {
+			return false;
+		}
+
+		String[] inputOptions = accepted_valued.split(",");
+
+		for (String inputOption : inputOptions) {
+			if (inputOption.equals(user_input)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	/**
+	 * Take user's input and validate
+	 * @param prompt
+	 * @param accepetedValues
+	 * @return
+	 */
+	public static String showPromptForInput(String prompt,
+			String accepetedValues) {
+		Scanner reader = new Scanner(System.in); // Reading from System.in
+		String input = "";
+		do {
+			displayToScreen(prompt);
+			input = reader.nextLine().trim();
+		} while (!validateInput(input, accepetedValues));
+		return input;
+	}
+
+	/**
+	 * Show message on screen
+	 * @param msg
+	 */
+	public static void displayToScreen(String msg) {
+		System.out.println(msg);
 	}
 }
