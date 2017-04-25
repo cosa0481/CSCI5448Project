@@ -10,28 +10,26 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Cascade;
-
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name="customer")
-@AttributeOverride(name="id", column=@Column(name="customer_id"))
+@Table(name = "customer")
+@AttributeOverride(name = "id", column = @Column(name = "customer_id"))
 public class Customer extends Person {
 
-	//TODO
+	// TODO
 	@Transient
 	private Membership membership;
 
-	@OneToOne( mappedBy="customer",cascade={CascadeType.ALL})
+	@OneToOne(mappedBy = "customer", cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
 	private Cart cart;
 
-	
 	public List<Order> getOrders() {
 		return null;
 	}
-	
+
 	public void addOrder(Order order) {
 	}
 
@@ -58,8 +56,8 @@ public class Customer extends Person {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-	
-	public IpaymentMethod getPaymentMethod(){
+
+	public IpaymentMethod getPaymentMethod() {
 		return null;
 	}
 

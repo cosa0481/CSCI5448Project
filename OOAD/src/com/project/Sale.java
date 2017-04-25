@@ -25,6 +25,10 @@ public class Sale {
 	@Column(name="DISCOUNT")
 	private double percentDiscount;
 	
+	public Sale(){
+		
+	}
+	
 	public Sale(Date startDate, Date endDate, double percentDiscount) {
 		this.startDate = startDate;
 		this.endDate = endDate;

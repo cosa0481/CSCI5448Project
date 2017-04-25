@@ -1,7 +1,11 @@
 package com.project;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Scanner;
+
+import org.hibernate.Session;
 
 public class Manager {
 
@@ -9,7 +13,7 @@ public class Manager {
 
 	private Person currentUser;
 	private UserType currentUserType;
-	
+
 	private List<Subscriber> observers;
 
 	public enum UserType {
@@ -73,38 +77,58 @@ public class Manager {
 		String user_input = showPromptForInput(
 				"Please select user type\nPress 1 for Customer\nPress 2 for Seller\nPress 3 for Administrator",
 				"1,2,3");
-		
+
 		processUserTypeInput(user_input);
 		displayToScreen("Bye");
 	}
 
-
 	private static void processUserTypeInput(String user_input) {
-		if(user_input.equals("1")){
+		if (user_input.equals("1")) {
 			handleCustomer();
 		}
-		if(user_input.equals("2")){
+		if (user_input.equals("2")) {
 			handleSeller();
 		}
-		if(user_input.equals("3")){
+		if (user_input.equals("3")) {
 			handleAdministrator();
 		}
 	}
 
 	private static void handleAdministrator() {
-		
+
 	}
 
 	private static void handleSeller() {
-		
+		Seller s = (Seller) loginUser(Seller.class);
+
+		if (s != null) {
+			System.out
+					.println("Login succesful, Welcome " + s.getFirstName());
+		}
 	}
 
 	private static void handleCustomer() {
-		
+		Customer c = (Customer) loginUser(Customer.class);
+
+		if (c != null) {
+			System.out
+					.println("Login succesful, Welcome " + c.getFirstName());
+			Session s = DatabaseManager.getInstance().getSession();
+			s.update(c);
+		}
+	}
+
+	public static Object loginUser(Class c) {
+		String credentials = showPromptForInput(
+				"Please enter userName and Password separatedby whitespace!",
+				"");
+		String[] login_credentials = credentials.split(" ");
+		return Person.login(login_credentials[0], login_credentials[1], c);
 	}
 
 	/**
 	 * Validate UserInput against accepted values
+	 * 
 	 * @param user_input
 	 * @param accepted_valued
 	 * @return
@@ -133,6 +157,7 @@ public class Manager {
 
 	/**
 	 * Take user's input and validate
+	 * 
 	 * @param prompt
 	 * @param accepetedValues
 	 * @return
@@ -150,6 +175,7 @@ public class Manager {
 
 	/**
 	 * Show message on screen
+	 * 
 	 * @param msg
 	 */
 	public static void displayToScreen(String msg) {

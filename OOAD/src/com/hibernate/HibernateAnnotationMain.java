@@ -231,7 +231,7 @@ public class HibernateAnnotationMain {
 		c.setFirstName("Rohit");
 		c.setLastName("Gupta");
 		c.setUsername("abcd");
-		c.setPassword("abcd");
+		c.setPassword("1234");
 		session.save(c);
 
 		System.out.println(c.getCart());
@@ -311,10 +311,10 @@ public class HibernateAnnotationMain {
 		
 		
 		Seller s= new Seller();
-		c.setFirstName("seller");
-		c.setLastName("seller");
-		c.setUsername("seller");
-		c.setPassword("seller");
+		s.setFirstName("seller");
+		s.setLastName("seller");
+		s.setUsername("seller");
+		s.setPassword("seller");
 		session.save(s);
 		
 		session.getTransaction().commit();
