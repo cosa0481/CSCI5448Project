@@ -8,6 +8,7 @@ import java.util.logging.Level;
 
 import org.hibernate.Session;
 
+import com.utility.DisplayUtilities;
 import com.utility.Utility;
 
 public class Manager {
@@ -126,13 +127,34 @@ public class Manager {
 
 			String input = Utility
 					.showPromptForInput(
-							"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 0 to quit\n",
+							"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 0 to quit",
 							"0,1,2,3");
+			
+			if (input.equals("1")) {
+
+			}
+			if (input.equals("2")) {
+
+			}
+			if (input.equals("3")) {
+				List<Order> user_orders = Order.getOrderForCustomer(c);
+				DisplayUtilities.displayOrder(user_orders);
+			}
+			if (input.equals("0")) {
+				
+			}
+			
+			
 		} else {
 			System.out.println("Incorrect Login, Please try again");
 		}
 	}
 
+	/**
+	 * Prompts user for credentials and validates them
+	 * @param c
+	 * @return
+	 */
 	public static Object loginUser(Class c) {
 		String credentials = Utility.showPromptForInput(
 				"Please enter userName and Password separatedby whitespace!",
