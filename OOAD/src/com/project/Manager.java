@@ -95,7 +95,12 @@ public class Manager {
 	}
 
 	private static void handleAdministrator() {
+		Administrator a = (Administrator) loginUser(Administrator.class);
 
+		if (a != null) {
+			System.out
+					.println("Login succesful, Welcome " + a.getFirstName());
+		}
 	}
 
 	private static void handleSeller() {
