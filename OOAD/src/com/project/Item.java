@@ -65,7 +65,6 @@ public class Item {
 	List<Review> reviews;
 
 	@OneToMany
-	@Transient
 	@JoinTable(name = "item_sales", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "item_id") }, inverseJoinColumns = { @JoinColumn(name = "sale_id", referencedColumnName = "sale_id", unique = true) })
 	private List<Sale> itemSales;
 
