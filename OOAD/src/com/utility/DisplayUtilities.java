@@ -1,7 +1,9 @@
 package com.utility;
 
 import java.util.List;
+import java.util.Map;
 
+import com.project.Cart;
 import com.project.Item;
 import com.project.Order;
 
@@ -46,5 +48,50 @@ public class DisplayUtilities {
 			System.out.print(foundItems.get(i).getCurrentPrice() + "\t");
 			System.out.println();
 		}
+
+		String input = Utility.showPromptForInput(
+				"Enter the Item# to view an item", "");
+		int item_no = Integer.parseInt(input);
+
+		while ( (item_no > foundItems.size()) || (item_no < 0) ) {
+			input = Utility.showPromptForInput(
+					"Enter the Item# to view an item", "");
+			item_no = Integer.parseInt(input);
+		}
+		displayItem(foundItems.get(item_no-1));
+	}
+
+	public static void displayItem(Item item) {
+
+		System.out.println("Printing item details");
+
+		System.out.println("Title:\t" + item.getTitle());
+		System.out.println("Category:\t" + item.getCategory().getName());
+		System.out.println("Rating:\t" + item.getNumStars());
+		System.out.println("Inventory:\t" + item.getInInventory());
+		System.out.println("Price:\t" + item.getCurrentPrice() + "\t");
+
+		System.out.println();
+		Utility.showPromptForInput(
+				"Press 1 to add item to cart", "");
+
+	}
+
+	public static void displayCart(Cart cart) {
+		Map<Item, Integer> items = cart.getItemCountMap();
+
+		if (items.size() == 0) {
+			Utility.displayToScreen("Your cart is empty!");
+			return;
+		}
+		Utility.displayToScreen("Your cart has the following items!");
+
+		for (Item i : cart.getItemCountMap().keySet()) {
+			System.out.print(i.getTitle() + "\t");
+			System.out.println(cart.getItemCountMap().get(i));
+		}
+
+		Utility.displayToScreen("Total value of your cart is "
+				+ cart.getCartValue());
 	}
 }

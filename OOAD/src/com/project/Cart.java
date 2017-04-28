@@ -1,7 +1,10 @@
 package com.project;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -21,8 +24,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.criterion.Restrictions;
 
 @Entity
 @Table(name = "cart", uniqueConstraints = { @UniqueConstraint(columnNames = { "cart_id" }) })
@@ -58,16 +64,17 @@ public class Cart {
 		return itemCountMap;
 	}
 
-	public void setItemCountMap(HashMap<Item, Integer> itemCountMap) {
+	public void setItemCountMap(Map<Item, Integer> itemCountMap) {
 		this.itemCountMap = itemCountMap;
 	}
 
-	public void addItemToCart(Item product, int quantity){
+	public void modifyCart(Item product, int quantity){
 		if(itemCountMap.containsKey(product)){
 			itemCountMap.put(product, itemCountMap.get(product)+quantity);
 		}else{
 			itemCountMap.put(product, quantity);
 		}
+		DatabaseManager.getInstance().saveOrUpdate(this);
 	}
 	
 	public Customer getCustomer() {
@@ -76,6 +83,11 @@ public class Cart {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	//TODO
+	public float getCartValue(){
+		return 100;
 	}
 
 }

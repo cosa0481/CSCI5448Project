@@ -1,6 +1,8 @@
 package com.project;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
@@ -11,8 +13,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.criterion.Restrictions;
 
 @Entity
 @Table(name = "customer")
@@ -23,7 +28,7 @@ public class Customer extends Person {
 	@Transient
 	private Membership membership;
 
-	@OneToOne(mappedBy = "customer", cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
+	@OneToOne(mappedBy = "customer", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	private Cart cart;
 
 	public List<Order> getOrders() {
@@ -59,6 +64,28 @@ public class Customer extends Person {
 
 	public IpaymentMethod getPaymentMethod() {
 		return null;
+	}
+
+	public Customer loadCartItems() {
+		Session session = null;
+
+		try {
+			session = DatabaseManager.getInstance().getSession();
+
+			Criteria criteria = session.createCriteria(Customer.class);
+			criteria.add(Restrictions.eq("id", this.getId()));
+
+			List<Object> listOfCustomer = criteria.list();
+
+			Customer c = (Customer) listOfCustomer.get(0);
+
+			Map<Item, Integer> items = c.getCart().getItemCountMap();
+			System.out.println(items.size());
+
+			return c;
+		} finally {
+			session.close();
+		}
 	}
 
 }

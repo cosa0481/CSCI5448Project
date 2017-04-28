@@ -1,6 +1,7 @@
 package com.project;
 
 import java.util.List;
+import java.util.Map;
 
 import com.utility.DisplayUtilities;
 import com.utility.Utility;
@@ -134,27 +135,25 @@ public class Manager {
 					.showPromptForInput(
 							"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 0 to quit",
 							"0,1,2,3");
-			
+
 			if (input.equals("1")) {
-				input = Utility
-						.showPromptForInput(
-								"Enter keywod for search",
-								"");
+				input = Utility.showPromptForInput("Enter keywod for search",
+						"");
 				List<Item> foundItems = Item.searchItems(input);
 				DisplayUtilities.displayItems(foundItems);
 			}
 			if (input.equals("2")) {
-
+				c =  c.loadCartItems();
+				DisplayUtilities.displayCart(c.getCart());
 			}
 			if (input.equals("3")) {
 				List<Order> user_orders = Order.getOrderForCustomer(c);
 				DisplayUtilities.displayOrder(user_orders);
 			}
 			if (input.equals("0")) {
-				
+
 			}
-			
-			
+
 		} else {
 			System.out.println("Incorrect Login, Please try again");
 		}
@@ -162,6 +161,7 @@ public class Manager {
 
 	/**
 	 * Prompts user for credentials and validates them
+	 * 
 	 * @param c
 	 * @return
 	 */
