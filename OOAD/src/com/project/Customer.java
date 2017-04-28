@@ -81,7 +81,7 @@ public class Customer extends Person {
 
 			Map<Item, Integer> items = c.getCart().getItemCountMap();
 			System.out.println(items.size());
-
+			Manager.getInstance().setCurrentUser(c);
 			return c;
 		} finally {
 			session.close();

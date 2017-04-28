@@ -127,7 +127,9 @@ public class Manager {
 	 */
 	private static void handleCustomer() {
 		Customer c = (Customer) loginUser(Customer.class);
-
+		
+		Manager.getInstance().setCurrentUser(c);
+		
 		if (c != null) {
 			System.out.println("Login succesful, Welcome " + c.getFirstName());
 
@@ -143,8 +145,8 @@ public class Manager {
 				DisplayUtilities.displayItems(foundItems);
 			}
 			if (input.equals("2")) {
-				c =  c.loadCartItems();
-				DisplayUtilities.displayCart(c.getCart());
+				c.loadCartItems();
+				DisplayUtilities.displayCart();
 			}
 			if (input.equals("3")) {
 				List<Order> user_orders = Order.getOrderForCustomer(c);

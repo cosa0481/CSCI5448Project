@@ -45,10 +45,10 @@ public class Cart {
 	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "cart_id"))
 	private Map<Item, Integer> itemCountMap;
 
-	@OneToOne(optional=false)
-	@JoinColumn(name="customer_id")
+	@OneToOne(optional = false)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
-	
+
 	@Transient
 	boolean isReadyForCheckout;
 
@@ -68,15 +68,24 @@ public class Cart {
 		this.itemCountMap = itemCountMap;
 	}
 
-	public void modifyCart(Item product, int quantity){
-		if(itemCountMap.containsKey(product)){
-			itemCountMap.put(product, itemCountMap.get(product)+quantity);
-		}else{
-			itemCountMap.put(product, quantity);
+	public void modifyCart(Item product, int quantity) {
+
+		Item selectedItem = null;
+
+		for (Item i : itemCountMap.keySet()) {
+			if (i.getId() == product.getId()) {
+				selectedItem = i;
+			}
+		}
+		if (itemCountMap.containsKey(selectedItem)) {
+			itemCountMap.put(selectedItem, itemCountMap.get(selectedItem)
+					+ quantity);
+		} else {
+			itemCountMap.put(selectedItem, quantity);
 		}
 		DatabaseManager.getInstance().saveOrUpdate(this);
 	}
-	
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -84,9 +93,9 @@ public class Cart {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
-	//TODO
-	public float getCartValue(){
+
+	// TODO
+	public float getCartValue() {
 		return 100;
 	}
 
