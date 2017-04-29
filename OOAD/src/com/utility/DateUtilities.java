@@ -59,6 +59,14 @@ public class DateUtilities {
 		System.out.println(isDateWithinRange(today, testDate5, testDate2));
 		System.out.println("Compare today between tomorrow and May 5 (false)");
 		System.out.println(isDateWithinRange(today, testDate3, testDate4));
+		System.out.println("Compare today with isDateToday function (true)");
+		System.out.println(isDateToday(today));
+		System.out.println("Compare GregToday with isDateToday function (true)");
+		System.out.println(isDateToday(testDate1));
+		System.out.println("Compare yesterday with isDateToday function (false)");
+		System.out.println(isDateToday(testDate2));
+		System.out.println("Compare tomorrow with isDateToday function (false)");
+		System.out.println(isDateToday(testDate3));
 
 	}
 
