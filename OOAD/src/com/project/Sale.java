@@ -66,7 +66,7 @@ public class Sale {
 		this.percentDiscount = percentDiscount;
 	}
 	
-	public boolean isSaleActive(Sale newSale) {
+	public boolean isSaleActive() {
 		Date today = new Date();
 		Date start = this.getStartDate();
 		Date end = this.getEndDate();
