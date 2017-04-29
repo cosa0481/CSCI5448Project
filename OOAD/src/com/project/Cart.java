@@ -53,7 +53,10 @@ public class Cart {
 	boolean isReadyForCheckout;
 
 	public boolean isReadyForCheckout() {
-		return isReadyForCheckout;
+		if(itemCountMap == null || itemCountMap.size() == 0){
+			return false;
+		}
+		return true;
 	}
 
 	public void setReadyForCheckout(boolean isReadyForCheckout) {
@@ -72,6 +75,10 @@ public class Cart {
 
 		Item selectedItem = null;
 
+		if(itemCountMap == null){
+			itemCountMap = new HashMap<Item, Integer>();
+		}
+		
 		for (Item i : itemCountMap.keySet()) {
 			if (i.getId() == product.getId()) {
 				selectedItem = i;
@@ -81,7 +88,7 @@ public class Cart {
 			itemCountMap.put(selectedItem, itemCountMap.get(selectedItem)
 					+ quantity);
 		} else {
-			itemCountMap.put(selectedItem, quantity);
+			itemCountMap.put(product, quantity);
 		}
 		DatabaseManager.getInstance().saveOrUpdate(this);
 	}

@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.criterion.Restrictions;
@@ -30,7 +31,7 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private Date orderDate;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinTable(name = "order_items", joinColumns = { @JoinColumn(name = "order_id", referencedColumnName = "order_id") }, inverseJoinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "item_id") })
 	private Set<Item> orderItems;
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.Cart;
+import com.project.CreditCardDAO;
 import com.project.Customer;
 import com.project.Item;
 import com.project.Manager;
@@ -90,7 +91,15 @@ public class DisplayUtilities {
 
 			if (currentUser instanceof Customer) {
 				Customer c = (Customer) currentUser;
-				c = c.loadCartItems();
+				
+				Cart cart;
+			
+				
+				if(c.getCart() == null){
+					c.initCart();
+				}else{
+					c = c.loadCartItems();
+				}
 				displayCart();
 
 				c.getCart().modifyCart(item, 1);
@@ -106,9 +115,14 @@ public class DisplayUtilities {
 		Customer c = (Customer) person;
 		Cart cart = c.getCart();
 
+		if(cart == null){
+			c.initCart();
+			cart = c.getCart();
+		}
+		
 		Map<Item, Integer> items = cart.getItemCountMap();
 
-		if (items.size() == 0) {
+		if (items == null  || items.size() == 0) {
 			Utility.displayToScreen("Your cart is empty!");
 			return;
 		}
@@ -123,4 +137,27 @@ public class DisplayUtilities {
 		Utility.displayToScreen("Total value of your cart is "
 				+ cart.getCartValue());
 	}
+
+	public static CreditCardDAO displayCreditCardPrompt(
+			List<CreditCardDAO> creditCardDetails) {
+		for (int i = 0; i < creditCardDetails.size(); i++) {
+			System.out.println("Card #" + (i + 1) + "\t");
+			System.out.print("Card No:\t"
+					+ creditCardDetails.get(i).getCreditCardNumber() + "\t");
+			System.out.println();
+		}
+
+		String input = Utility.showPromptForInput(
+				"Enter the Card# to select a card", "");
+		int card_no = Integer.parseInt(input);
+
+		while ((card_no > creditCardDetails.size()) || (card_no < 0)) {
+			input = Utility.showPromptForInput(
+					"Enter the Card# to select a card", "");
+			card_no = Integer.parseInt(input);
+		}
+
+		return creditCardDetails.get(card_no - 1);
+	}
+
 }

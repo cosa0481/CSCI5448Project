@@ -3,6 +3,7 @@ package com.project;
 import java.util.List;
 import java.util.Map;
 
+import com.project.PaymentMethodFactory.Payment_Method;
 import com.utility.DisplayUtilities;
 import com.utility.Utility;
 
@@ -127,9 +128,9 @@ public class Manager {
 	 */
 	private static void handleCustomer() {
 		Customer c = (Customer) loginUser(Customer.class);
-		
+
 		Manager.getInstance().setCurrentUser(c);
-		
+
 		if (c != null) {
 			System.out.println("Login succesful, Welcome " + c.getFirstName());
 
@@ -155,10 +156,29 @@ public class Manager {
 
 			}
 			if (input.equals("4")) {
-				String shipping = Utility.showPromptForInput("Please select the shipping method\nPress 1 for Basic\nPress 2 for Deluxe\nPress 3 for Premium", "1,2,3");
-				String payment = Utility.showPromptForInput("Please select the payment method\nPress 1 for Card Payment\nPress 2 for Venmo", "1,2");
-				c.checkout(shipping,payment);
-				DisplayUtilities.displayOrder();
+				String shipping = Utility
+						.showPromptForInput(
+								"Please select the shipping method\nPress 1 for Basic\nPress 2 for Deluxe\nPress 3 for Premium",
+								"1,2,3");
+				String payment = Utility
+						.showPromptForInput(
+								"Please select the payment method\nPress 1 for Card Payment\nPress 2 for Venmo",
+								"1,2");
+				
+				String shippingAddress = Utility
+						.showPromptForInput(
+								"Please enter shipping address",
+								"");
+				Cart cart = c.getCart();
+
+				if(cart == null){
+					Utility.displayToScreen("Your cart is empty");
+					return;
+				}
+				Order customer_order = c.checkout(shipping, payment,shippingAddress);
+				//DisplayUtilities.displayOrder();
+
+			
 			}
 
 		} else {
