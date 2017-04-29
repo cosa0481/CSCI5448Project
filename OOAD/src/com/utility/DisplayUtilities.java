@@ -46,7 +46,7 @@ public class DisplayUtilities {
 		System.out.println(foundItems.size() + " items found");
 
 		for (int i = 0; i < foundItems.size(); i++) {
-			System.out.println("Item#" + (i + 1) + "\t");
+			System.out.println("Item #" + (i + 1) + "\t");
 			System.out.print("Title:\t" + foundItems.get(i).getTitle() + "\t");
 			System.out.print("Price:\t" + foundItems.get(i).getCurrentPrice()
 					+ "\t");
@@ -67,13 +67,13 @@ public class DisplayUtilities {
 
 	public static void displayItem(Item item) {
 
-		System.out.println("Printing item details");
+		System.out.println("Item details:");
 
-		System.out.println("Title:\t" + item.getTitle());
+		System.out.println("Title:\t\t" + item.getTitle());
 		System.out.println("Category:\t" + item.getCategory().getName());
-		System.out.println("Rating:\t" + item.getNumStars());
+		System.out.println("Rating:\t\t" + item.getNumStars());
 		System.out.println("Inventory:\t" + item.getInInventory());
-		System.out.println("Price:\t" + item.getCurrentPrice() + "\t");
+		System.out.println("Price:\t\t" + item.getCurrentPrice() + "\t");
 
 		System.out.println();
 		String input = Utility.showPromptForInput(
