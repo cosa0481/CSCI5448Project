@@ -12,7 +12,10 @@ import com.project.Person;
 
 public class DisplayUtilities {
 
-	public static void displayOrder(List<Order> orders) {
+	public static void displayOrder() {
+		List<Order> orders = Order.getOrderForCustomer((Customer) Manager
+				.getInstance().getCurrentUser());
+
 		if (orders.size() == 0) {
 			Utility.displayToScreen("User has not placed any order");
 			return;
@@ -93,7 +96,7 @@ public class DisplayUtilities {
 				c.getCart().modifyCart(item, 1);
 			}
 			Utility.displayToScreen("The item has been succesfully added");
-			
+
 			displayCart();
 		}
 	}

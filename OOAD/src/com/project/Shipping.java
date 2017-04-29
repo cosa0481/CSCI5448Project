@@ -1,64 +1,111 @@
 package com.project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
+import org.hibernate.Session;
+
 @Entity
-@Table(name="shipping")
+@Table(name = "shipping")
 public class Shipping {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="shipping_id", nullable=false, unique=true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "shipping_id", nullable = false, unique = true)
 	private int id;
 
-    @ManyToOne(optional=false)
-    @JoinColumn(referencedColumnName="region_id",name="from_region")
-	private Region from;
-	
-    @ManyToOne(optional=false)
-    @JoinColumn(referencedColumnName="region_id",name="to_region")
-	private Region to;
-	
-	@Column(name="DAYS")
+	@Column(name = "shippingMethod")
+	private String shippingMethod;
+
+	/*
+	 * @ManyToOne(optional=false)
+	 * 
+	 * @JoinColumn(referencedColumnName="region_id",name="from_region") private
+	 * Region from;
+	 * 
+	 * @ManyToOne(optional=false)
+	 * 
+	 * @JoinColumn(referencedColumnName="region_id",name="to_region") private
+	 * Region to;
+	 */
+
+	public String getShippingMethod() {
+		return shippingMethod;
+	}
+
+	public void setShippingMethod(String shippingMethod) {
+		this.shippingMethod = shippingMethod;
+	}
+
+	@Column(name = "DAYS")
 	private int shippingDays;
-	
-	@Column(name="COST")
+
+	@Column(name = "COST")
 	private int shippingCost;
-	
+
 	public boolean initiateOrder(Order order) {
-		//TODO
+		// TODO
 		return false;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Region getFrom() {
-		return from;
-	}
-	public void setFrom(Region from) {
-		this.from = from;
-	}
-	public Region getTo() {
-		return to;
-	}
-	public void setTo(Region to) {
-		this.to = to;
-	}
+
+	/*
+	 * public Region getFrom() { return from; } public void setFrom(Region from)
+	 * { this.from = from; } public Region getTo() { return to; } public void
+	 * setTo(Region to) { this.to = to; }
+	 */
 	public int getShippingDays() {
 		return shippingDays;
 	}
+
 	public void setShippingDays(int shippingDays) {
 		this.shippingDays = shippingDays;
 	}
+
 	public int getShippingCost() {
 		return shippingCost;
 	}
+
 	public void setShippingCost(int shippingCost) {
 		this.shippingCost = shippingCost;
+	}
+
+	public static void main(String[] args) {
+
+		Session session = DatabaseManager.getInstance().getSession();
+
+		session.beginTransaction();
+
+		Shipping s1 = new Shipping();
+		s1.setShippingCost(100);
+		s1.setShippingDays(5);
+		s1.setShippingMethod("Basic");
+		session.save(s1);
+
+		s1 = new Shipping();
+		s1.setShippingCost(200);
+		s1.setShippingDays(2);
+		s1.setShippingMethod("Deluxe");
+		session.save(s1);
+
+		s1 = new Shipping();
+		s1.setShippingCost(300);
+		s1.setShippingDays(1);
+		s1.setShippingMethod("Preimum");
+		session.save(s1);
+
+		session.getTransaction().commit();
+
+		DatabaseManager.getInstance().getSessionFactory().close();
 	}
 
 }

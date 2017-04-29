@@ -135,8 +135,8 @@ public class Manager {
 
 			String input = Utility
 					.showPromptForInput(
-							"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 0 to quit",
-							"0,1,2,3");
+							"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 0 to quit",
+							"0,1,2,3,4");
 
 			if (input.equals("1")) {
 				input = Utility.showPromptForInput("Enter keywod for search",
@@ -149,11 +149,16 @@ public class Manager {
 				DisplayUtilities.displayCart();
 			}
 			if (input.equals("3")) {
-				List<Order> user_orders = Order.getOrderForCustomer(c);
-				DisplayUtilities.displayOrder(user_orders);
+				DisplayUtilities.displayOrder();
 			}
 			if (input.equals("0")) {
 
+			}
+			if (input.equals("4")) {
+				String shipping = Utility.showPromptForInput("Please select the shipping method\nPress 1 for Basic\nPress 2 for Deluxe\nPress 3 for Premium", "1,2,3");
+				String payment = Utility.showPromptForInput("Please select the payment method\nPress 1 for Card Payment\nPress 2 for Venmo", "1,2");
+				c.checkout(shipping,payment);
+				DisplayUtilities.displayOrder();
 			}
 
 		} else {

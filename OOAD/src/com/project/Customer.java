@@ -1,5 +1,7 @@
 package com.project;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,8 +40,26 @@ public class Customer extends Person {
 	public void addOrder(Order order) {
 	}
 
-	public Order checkout() {
-		return null;
+	public Order checkout(String shipping, String payment) {
+		this.loadCartItems();
+
+		Session s = DatabaseManager.getInstance().getSession();
+		
+		Shipping shippingMethod = (Shipping) s.get(Shipping.class, Integer.parseInt(shipping));
+		
+		HashMap<Item, Integer> items = new HashMap<>();
+		
+		Set<Item> car_items = items.keySet();
+		Order o = new Order();
+		o.setCustomer(this);
+		o.setOrder_date(new Date());
+		o.setOrderValue(this.getCart().getCartValue());
+		o.setOrder_items(car_items);
+		o.setShippingAddress("address");
+		o.setShippingMethod(shippingMethod);
+		DatabaseManager.getInstance().saveOrUpdate(o);
+		
+		return o;
 	}
 
 	public void writeReview(Item product, Review review) {

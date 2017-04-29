@@ -2,6 +2,7 @@ package com.project;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class ItemSubscriber implements Subscriber {
 
@@ -9,7 +10,7 @@ public class ItemSubscriber implements Subscriber {
 
 	@Override
 	public void log(Order order) {
-		List<Item> orderItems = order.getOrder_items();
+		Set<Item> orderItems = order.getOrder_items();
 		String entry = "Item ";
 		for(Item i : orderItems) {
 			entry += i.getTitle();

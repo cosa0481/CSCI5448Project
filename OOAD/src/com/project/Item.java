@@ -204,8 +204,6 @@ public class Item {
 		session.save(region2);
 
 		Shipping shippping1 = new Shipping();
-		shippping1.setFrom(region1);
-		shippping1.setTo(region2);
 		shippping1.setShippingCost(50);
 		shippping1.setShippingDays(15);
 		session.save(shippping1);

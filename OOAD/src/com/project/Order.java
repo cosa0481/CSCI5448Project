@@ -3,6 +3,7 @@ package com.project;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -31,7 +32,7 @@ public class Order {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "order_items", joinColumns = { @JoinColumn(name = "order_id", referencedColumnName = "order_id") }, inverseJoinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "item_id") })
-	private List<Item> orderItems;
+	private Set<Item> orderItems;
 
 	@Column(name = "ORDERVALUE")
 	private float orderValue;
@@ -75,11 +76,11 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
-	public List<Item> getOrder_items() {
+	public Set<Item> getOrder_items() {
 		return orderItems;
 	}
 
-	public void setOrder_items(List<Item> orderItems) {
+	public void setOrder_items(Set<Item> orderItems) {
 		this.orderItems = orderItems;
 	}
 

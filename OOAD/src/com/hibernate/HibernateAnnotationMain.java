@@ -4,6 +4,7 @@ package com.hibernate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -175,25 +176,24 @@ public class HibernateAnnotationMain {
 		//start transaction
 		session.beginTransaction();
 		
-		Region region1 = new Region();
-		region1.setState("CO");
-		region1.setTitle("UCB");
-		region1.setZipcode(80204);
-		session.save(region1);
-		
-		
-		Region region2 = new Region();
-		region2.setState("CO");
-		region2.setTitle("Glenlake");
-		region2.setZipcode(80301);
-		session.save(region2);
-		
-		Shipping shippping1 = new Shipping();
-		shippping1.setFrom(region1);
-		shippping1.setTo(region2);
-		shippping1.setShippingCost(100);
-		shippping1.setShippingDays(7);
-		session.save(shippping1);
+		Shipping s1 = new Shipping();
+		s1.setShippingCost(100);
+		s1.setShippingDays(5);
+		s1.setShippingMethod("Basic");
+		session.save(s1);
+
+		s1 = new Shipping();
+		s1.setShippingCost(200);
+		s1.setShippingDays(2);
+		s1.setShippingMethod("Deluxe");
+		session.save(s1);
+
+		s1 = new Shipping();
+		s1.setShippingCost(300);
+		s1.setShippingDays(1);
+		s1.setShippingMethod("Preimum");
+		session.save(s1);
+
 
 		
 		Category category1 = new Category();
@@ -286,10 +286,10 @@ public class HibernateAnnotationMain {
 		o1.setCustomer(c);
 		o1.setOrder_date(new Date());
 		o1.setOrderValue(120);
-		o1.setShippingMethod(shippping1);
+		o1.setShippingMethod(s1);
 		o1.setShippingAddress("address for order 1");
 		
-		List<Item> items = new ArrayList<>();
+		Set<Item> items = new HashSet<Item>();
 		items.add(i);
 		o1.setOrder_items(items);
 		
@@ -299,10 +299,10 @@ public class HibernateAnnotationMain {
 		o2.setCustomer(c);
 		o2.setOrder_date(new Date());
 		o2.setOrderValue(120);
-		o2.setShippingMethod(shippping1);
+		o2.setShippingMethod(s1);
 		o2.setShippingAddress("address for order 1");
 		
-		items = new ArrayList<>();
+		items = new HashSet<>();
 		items.add(i);
 		items.add(i2);
 		o2.setOrder_items(items);
