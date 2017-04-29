@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.utility.DateUtilities;
+
 import org.hibernate.Session;
 
 @Entity
@@ -62,6 +64,13 @@ public class Sale {
 
 	public void setPercentDiscount(double percentDiscount) {
 		this.percentDiscount = percentDiscount;
+	}
+	
+	public boolean isSaleActive() {
+		Date today = new Date();
+		Date start = this.getStartDate();
+		Date end = this.getEndDate();
+		return (DateUtilities.isDateWithinRange(today, start, end));
 	}
 
 	public boolean isSaleValid(Sale newSale, List<Sale> itemSales,
