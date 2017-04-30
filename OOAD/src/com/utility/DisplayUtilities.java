@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Date;
 import java.util.Scanner;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -13,7 +18,9 @@ import java.text.ParseException;
 import com.project.Cart;
 import com.project.CreditCardDAO;
 import com.project.Customer;
+import com.project.DatabaseManager;
 import com.project.Item;
+import com.project.LogEntry;
 import com.project.Manager;
 import com.project.Order;
 import com.project.Person;
@@ -299,5 +306,28 @@ public class DisplayUtilities {
 
 			// displayCart();
 		}
+	}
+	
+	public static void displayLog(String type) {
+		Session s = DatabaseManager.getInstance().getSession();
+		s.beginTransaction();
+		
+		Criteria criteria = s.createCriteria(LogEntry.class);
+		criteria.add(Restrictions.eq("log_type", type));
+		List<Object> database_log_entries = criteria.list();
+		
+		List<LogEntry> log_entries = new ArrayList<LogEntry>();
+		for(Object entry : database_log_entries) {
+			log_entries.add((LogEntry) entry);
+		}
+		
+		s.close();
+		
+		System.out.println(type 
+				+ " Log:\tTimestamp\tEntry\n---------\t---------\t-----");
+		for(LogEntry entry : entries) {
+			System.out.println(entry.log_date + " : " + entry.log_entry);
+		}
+		System.out.println("End " + type + " Log\n");
 	}
 }
