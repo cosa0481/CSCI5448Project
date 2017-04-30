@@ -307,7 +307,7 @@ public class DisplayUtilities {
 			// displayCart();
 		}
 	}
-	
+
 	public static void displayLog(String type) {
 		Session s = DatabaseManager.getInstance().getSession();
 		s.beginTransaction();
@@ -325,7 +325,7 @@ public class DisplayUtilities {
 		
 		System.out.println(type 
 				+ " Log:\tTimestamp\tEntry\n---------\t---------\t-----");
-		for(LogEntry entry : entries) {
+		for(LogEntry entry : log_entries) {
 			System.out.println(entry.log_date + " : " + entry.log_entry);
 		}
 		System.out.println("End " + type + " Log\n");
