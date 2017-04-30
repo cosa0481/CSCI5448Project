@@ -1,5 +1,6 @@
 package com.utility;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ import com.project.Sale;
 public class DisplayUtilities {
 
 	public static void displayOrder() {
-		
+
 		Customer c = ((Customer) Manager.getInstance().getCurrentUser());
 		Order.getOrderForCustomer(c);
 		Collection<Order> orders = c.getOrders();
@@ -137,14 +138,41 @@ public class DisplayUtilities {
 		}
 		Utility.displayToScreen("Your cart has the following items!");
 
+		StringBuilder allowedInput = new StringBuilder("");
+		ArrayList<Item> itemList = new ArrayList<>();
+
+		int j = 0;
 		for (Item i : cart.getItemCountMap().keySet()) {
+			itemList.add(i);
+			allowedInput.append((j + 1) + ",");
 			System.out.println("Item name:\t" + i.getTitle() + "\t");
 			System.out.println("Quantity:\t" + cart.getItemCountMap().get(i));
 			System.out.println();
+			j++;
 		}
 
 		Utility.displayToScreen("Total value of your cart is "
 				+ cart.getCartValue());
+
+		String input = Utility.showPromptForInput(
+				"Press 1 to update cart\nPress 2 to return", "1,2");
+
+		int parsed_input = Integer.parseInt(input);
+
+		if (parsed_input == 1) {
+			input = Utility.showPromptForInput("Enter the Item# to delete",
+					allowedInput.toString());
+			int parsed_user_input = Integer.parseInt(input);
+
+			while ((parsed_user_input > items.size())
+					|| (parsed_user_input < 0)) {
+				input = Utility.showPromptForInput("Enter the Item# to delete",
+						allowedInput.toString());
+				parsed_user_input = Integer.parseInt(input);
+			}
+			c.getCart().modifyCart(itemList.get(parsed_user_input-1), -1);
+		}
+
 	}
 
 	public static CreditCardDAO displayCreditCardPrompt(

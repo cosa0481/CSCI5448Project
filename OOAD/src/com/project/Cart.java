@@ -86,8 +86,12 @@ public class Cart {
 			}
 		}
 		if (itemCountMap.containsKey(selectedItem)) {
-			itemCountMap.put(selectedItem, itemCountMap.get(selectedItem)
-					+ quantity);
+			int newVal = itemCountMap.get(selectedItem) + quantity;
+			if (newVal == 0) {
+				itemCountMap.remove(selectedItem);
+			} else {
+				itemCountMap.put(selectedItem, newVal);
+			}
 		} else {
 			itemCountMap.put(product, quantity);
 		}
