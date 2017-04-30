@@ -6,23 +6,20 @@ import java.util.Set;
 
 public class ItemSubscriber implements Subscriber {
 
-	private Log itemLog;
-
 	@Override
 	public void log(Order order) {
 		Set<Item> orderItems = order.getOrder_items();
-		String entry = "Item ";
+		String entry = "Items ordered: ";
 		for(Item i : orderItems) {
 			entry += i.getTitle();
 			entry += " ";
 		}
-		entry += "ordered.";
 		Date timeStamp = new Date();
-		itemLog.addLogEntry(entry, timeStamp);
+		LogEntry log_entry = new LogEntry();
+		log_entry.addLogEntry("Item", entry, timeStamp);
 	}
 
 	public ItemSubscriber() {
-		itemLog = new Log();
 		Manager.getInstance().attach(this);
 	}
 }

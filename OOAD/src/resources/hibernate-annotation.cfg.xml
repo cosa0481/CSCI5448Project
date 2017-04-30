@@ -28,6 +28,6 @@
 		<mapping class="com.project.Category"/>
 		<mapping class="com.project.VenmoDAO"/>
 		<mapping class="com.project.CreditCardDAO"/>
-		<mapping class="com.project.Log"/>
+		<mapping class="com.project.LogEntry"/>
 	</session-factory>
 </hibernate-configuration>

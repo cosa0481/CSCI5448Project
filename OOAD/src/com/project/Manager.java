@@ -14,7 +14,7 @@ public class Manager {
 	private Person currentUser;
 	private UserType currentUserType;
 
-	private List<Subscriber> observers;
+	private static List<Subscriber> observers;
 
 	public enum UserType {
 		CUSTOMER, SELLER, ADMINISTRATOR
@@ -162,6 +162,9 @@ public class Manager {
 	 */
 	private static void handleCustomer() {
 		Customer c = (Customer) loginUser(Customer.class);
+		observers.add(new UserSubscriber());
+		observers.add(new ItemSubscriber());
+		observers.add(new OrderSubscriber());
 
 		while (true) {
 
