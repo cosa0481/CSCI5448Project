@@ -1,10 +1,11 @@
 package com.project;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 public class ItemSubscriber implements Subscriber {
+	
+	public String type;
 
 	@Override
 	public void log(Order order) {
@@ -16,10 +17,11 @@ public class ItemSubscriber implements Subscriber {
 		}
 		Date timeStamp = new Date();
 		LogEntry log_entry = new LogEntry();
-		log_entry.addLogEntry("Item", entry, timeStamp);
+		log_entry.addLogEntry(this.type, entry, timeStamp);
 	}
 
 	public ItemSubscriber() {
+		this.type = "Item";
 		Manager.getInstance().attach(this);
 	}
 }
