@@ -73,7 +73,7 @@ public class Manager {
 	public static void main(String[] args) {
 
 		Utility.showPromptForInput(
-				"Welcome to marketplace, Press any key to continue", "");
+				"Welcome to Marketplace. Press any key to continue", "");
 		String user_input = Utility
 				.showPromptForInput(
 						"Please select user type\nPress 1 for Customer\nPress 2 for Seller\nPress 3 for Administrator",
@@ -119,6 +119,39 @@ public class Manager {
 
 		if (s != null) {
 			System.out.println("Login succesful, Welcome " + s.getFirstName());
+			
+			String input = Utility
+					.showPromptForInput(
+							"Please select one of the options\nPress 1 to add item\nPress 2 to schedule a sale\nPress 3 to return an item\nPress 0 to quit",
+							"0,1,2,3");
+
+			if (input.equals("1")) {
+				input = Utility.showPromptForInput("Enter name of item to add:",
+						"");
+				// show categories, prompt for input?
+				// set price, inventory, numStars = 0.0, set serial number?
+				// i = new item, session.save();
+				/*input = Utility.showPromptForInput("Enter search term for item:",
+						"");
+				List<Item> foundItems = Item.searchItems(input);
+				DisplayUtilities.displayItems(foundItems);*/
+			}
+			if (input.equals("2")) {				
+				input = Utility.showPromptForInput("Enter search term for item you wish to put on sale:",
+				"");
+				List<Item> foundItems = Item.searchItems(input);
+				DisplayUtilities.displayItemsToAddSale(foundItems);
+				//c.loadCartItems();
+				//DisplayUtilities.displayCart();
+			}
+			if (input.equals("3")) {
+				//List<Order> user_orders = Order.getOrderForCustomer(c);
+				//DisplayUtilities.displayOrder(user_orders);
+			}
+			if (input.equals("0")) {
+
+			}
+			
 		} else {
 			System.out.println("Incorrect Login, Please try again");
 		}
@@ -205,7 +238,7 @@ public class Manager {
 	 */
 	public static Object loginUser(Class c) {
 		String credentials = Utility.showPromptForInput(
-				"Please enter userName and Password separatedby whitespace!",
+				"Please enter userName and Password separated by whitespace!",
 				"");
 		String[] login_credentials = credentials.split(" ");
 		if (login_credentials.length < 2) {
