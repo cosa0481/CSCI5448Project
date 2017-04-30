@@ -21,6 +21,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -113,6 +114,10 @@ public class Item {
 		// See if currentPrice was set today—if so, assume it is still
 		// the current price, and return it. Else,
 		// calculate current price, and then return it.
+		if(this.getCurrentPriceSet() == null) {
+			Date pastDate = new GregorianCalendar(2000, Calendar.FEBRUARY, 12).getTime();
+			this.setCurrentPriceSet(pastDate);
+		}
 		if(DateUtilities.isDateToday(this.getCurrentPriceSet())) {
 			return this.currentPrice;
 		} else {
@@ -231,6 +236,10 @@ public class Item {
 
 			for (Object o : results) {
 				items.add((Item) o);
+			}
+			for (Item i: items) {
+				Hibernate.initialize(i.getItemSales());
+				Hibernate.initialize(i.getCategory().getCategorySales());
 			}
 			return items;
 		} finally {
