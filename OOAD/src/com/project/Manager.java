@@ -190,7 +190,8 @@ public class Manager {
 						DisplayUtilities.displayOrder();
 					}
 					if (input.equals("0")) {
-
+						System.out.println("Bye");
+						System.exit(0);
 					}
 					if (input.equals("4")) {
 						String shipping = Utility
