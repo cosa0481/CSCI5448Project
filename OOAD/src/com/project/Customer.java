@@ -100,6 +100,7 @@ public class Customer extends Person {
 		if (paymentMethod.processPayment(o)) {
 			System.out.println(s.save(o).toString());
 			customer.addOrder(o);
+			Manager.getInstance().logOrder(o);
 			// DatabaseManager.getInstance().saveOrUpdate(o);
 			customer.getCart().getItemCountMap().clear();
 			s.saveOrUpdate(customer.getCart());
