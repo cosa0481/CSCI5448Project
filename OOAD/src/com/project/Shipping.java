@@ -1,9 +1,11 @@
 package com.project;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.Session;
 
@@ -18,18 +20,6 @@ public class Shipping {
 
 	@Column(name = "shippingMethod")
 	private String shippingMethod;
-
-	/*
-	 * @ManyToOne(optional=false)
-	 * 
-	 * @JoinColumn(referencedColumnName="region_id",name="from_region") private
-	 * Region from;
-	 * 
-	 * @ManyToOne(optional=false)
-	 * 
-	 * @JoinColumn(referencedColumnName="region_id",name="to_region") private
-	 * Region to;
-	 */
 
 	public String getShippingMethod() {
 		return shippingMethod;
@@ -58,11 +48,6 @@ public class Shipping {
 		this.id = id;
 	}
 
-	/*
-	 * public Region getFrom() { return from; } public void setFrom(Region from)
-	 * { this.from = from; } public Region getTo() { return to; } public void
-	 * setTo(Region to) { this.to = to; }
-	 */
 	public int getShippingDays() {
 		return shippingDays;
 	}

@@ -89,8 +89,7 @@ public class Customer extends Person {
 			s.getTransaction().commit();
 		}
 
-		DatabaseManager.getInstance().closeSession();
-		DatabaseManager.getInstance().getSessionFactory().close();
+		s.close();
 
 		return o;
 	}
@@ -167,7 +166,7 @@ public class Customer extends Person {
 		session.getSessionFactory().close();
 	}
 
-	public void initCart() {
+	public void initalizeCart() {
 		cart = new Cart();
 		cart.setCustomer(this);
 		this.setCart(cart);

@@ -96,22 +96,26 @@ public class CreditCardDAO {
 
 	public static List<CreditCardDAO> getCreditCardForCustomer() {
 
-		Session s = DatabaseManager.getInstance().getSession();
-		Customer c = (Customer) Manager.getInstance().getCurrentUser();
+		Session s = null;
+		try {
+			s = DatabaseManager.getInstance().getSession();
+			Customer c = (Customer) Manager.getInstance().getCurrentUser();
 
-		Criteria cri = s.createCriteria(CreditCardDAO.class);
-		cri.add(Restrictions.eq("customer", c));
-		cri.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		List<Object> user_credit_cards = cri.list();
+			Criteria cri = s.createCriteria(CreditCardDAO.class);
+			cri.add(Restrictions.eq("customer", c));
+			cri.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			List<Object> user_credit_cards = cri.list();
 
-		List<CreditCardDAO> creditCards = new ArrayList<>();
+			List<CreditCardDAO> creditCards = new ArrayList<>();
 
-		for (Object o : user_credit_cards) {
-			creditCards.add((CreditCardDAO) o);
+			for (Object o : user_credit_cards) {
+				creditCards.add((CreditCardDAO) o);
+			}
+
+			return creditCards;
+		} finally {
+			s.close();
 		}
-
-		return creditCards;
-
 	}
 
 	public static void main(String[] args) {

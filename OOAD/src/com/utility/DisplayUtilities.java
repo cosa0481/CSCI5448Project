@@ -96,7 +96,7 @@ public class DisplayUtilities {
 			
 				
 				if(c.getCart() == null){
-					c.initCart();
+					c.initalizeCart();
 				}else{
 					c = c.loadCartItems();
 				}
@@ -116,7 +116,7 @@ public class DisplayUtilities {
 		Cart cart = c.getCart();
 
 		if(cart == null){
-			c.initCart();
+			c.initalizeCart();
 			cart = c.getCart();
 		}
 		

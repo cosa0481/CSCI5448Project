@@ -42,19 +42,25 @@ public class VenmoDAO {
 	}
 
 	public static VenmoDAO getVenmoForCustomer() {
+		Session s = null;
 
-		Session s = DatabaseManager.getInstance().getSession();
-		Customer c = (Customer) Manager.getInstance().getCurrentUser();
+		try {
 
-		Criteria cri = s.createCriteria(VenmoDAO.class);
-		cri.add(Restrictions.eq("customer", c));
-		cri.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		List<Object> venmo_list = cri.list();
+			s = DatabaseManager.getInstance().getSession();
+			Customer c = (Customer) Manager.getInstance().getCurrentUser();
 
-		if (venmo_list.size() > 0) {
-			return (VenmoDAO) venmo_list.get(0);
+			Criteria cri = s.createCriteria(VenmoDAO.class);
+			cri.add(Restrictions.eq("customer", c));
+			cri.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			List<Object> venmo_list = cri.list();
+
+			if (venmo_list.size() > 0) {
+				return (VenmoDAO) venmo_list.get(0);
+			}
+			return null;
+		} finally {
+			s.close();
 		}
-		return null;
 	}
 
 	public static void main(String[] args) {
