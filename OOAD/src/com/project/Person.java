@@ -22,7 +22,7 @@ abstract public class Person {
 	@Column(name = "lastName", length = 20, nullable = true)
 	private String lastName;
 
-	@Column(name = "username", length = 20, nullable = true/*,unique=true*/)
+	@Column(name = "username", length = 20, nullable = true,unique=true)
 	private String username;
 
 	@Column(name = "password", length = 20, nullable = true)
