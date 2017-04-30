@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -29,7 +30,7 @@ public class Category {
 
 	@OneToMany
 	@JoinTable(name = "category_sales", joinColumns = { @JoinColumn(name = "category_id", referencedColumnName = "category_id") }, inverseJoinColumns = { @JoinColumn(name = "sale_id", referencedColumnName = "sale_id", unique = true) })
-	private List<Sale> categorySales;
+	private List<Sale> categorySales = new ArrayList<Sale>();
 
 	public int getCategory_id() {
 		return category_id;
@@ -55,8 +56,9 @@ public class Category {
 		this.categorySales = categorySales;
 	}
 
-	public void addCategorySale(Date startDate, Date endDate,
-			double percentDiscount) {
-
+	public void addCategorySale(Sale catSale) {
+		if (!categorySales.contains(catSale)) {
+			categorySales.add(catSale);
+		}
 	}
 }

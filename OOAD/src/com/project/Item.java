@@ -1,6 +1,7 @@
 package com.project;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,10 +21,14 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import com.utility.DateUtilities;
 
 @Entity
 @Table(name = "item", uniqueConstraints = { @UniqueConstraint(columnNames = { "item_id" }) })
@@ -66,7 +71,7 @@ public class Item {
 
 	@OneToMany
 	@JoinTable(name = "item_sales", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "item_id") }, inverseJoinColumns = { @JoinColumn(name = "sale_id", referencedColumnName = "sale_id", unique = true) })
-	private List<Sale> itemSales;
+	private List<Sale> itemSales = new ArrayList<Sale>();
 
 	public float getNumStars() {
 		return numStars;
@@ -79,17 +84,59 @@ public class Item {
 	public void addReview(Review review) {
 		reviews.add(review);
 	}
+	
+	public void calculateCurrentPrice() {
+		// use this method to calculate and store a current
+		// price, and store the date it was set.
+		float max_discount = 0.0f;
+		float discount = 0.0f;
+		if(this.getAllSales() != null) {
+			List<Sale> allSales = this.getAllSales();
+			for( Sale sale : allSales) {
+				if(sale.isSaleActive()) {
+					discount = (float) sale.getPercentDiscount();
+					// handle cases where 40% is entered as "40", not "0.4"
+					if(discount > 1) {
+						discount = discount/100.0f;
+					}
+					if(discount > max_discount) {
+						max_discount = discount;
+					}
+				}
+			}
+		}
+		this.setCurrentPrice(this.getSuggestedRetailPrice() * (1 - max_discount));		
+		Date today = new Date();
+		this.setCurrentPriceSet(today);
+	}
 
 	public float getCurrentPrice() {
-		// calculate from itemSales, categorySales, membership
-		// and region discounts
-		float currentPrice = this.currentPrice;
-		float bestDiscount = 0;
-		return currentPrice * (1 - bestDiscount);
+		// See if currentPrice was set today—if so, assume it is still
+		// the current price, and return it. Else,
+		// calculate current price, and then return it.
+		if(this.getCurrentPriceSet() == null) {
+			Date pastDate = new GregorianCalendar(2000, Calendar.FEBRUARY, 12).getTime();
+			this.setCurrentPriceSet(pastDate);
+		}
+		if(DateUtilities.isDateToday(this.getCurrentPriceSet())) {
+			return this.currentPrice;
+		} else {
+			this.calculateCurrentPrice();
+			return this.currentPrice;
+		}
 	}
 
 	public void setCurrentPrice(float currentPrice) {
+		this.currentPriceSet = new Date();
 		this.currentPrice = currentPrice;
+	}
+	
+	public Date getCurrentPriceSet() {
+		return currentPriceSet;
+	}
+
+	public void setCurrentPriceSet(Date currentPriceSet) {
+		this.currentPriceSet = currentPriceSet;
 	}
 
 	public int getInInventory() {
@@ -137,15 +184,26 @@ public class Item {
 	}
 
 	public List<Sale> getAllSales() {
-		return itemSales;
+		// database stuff?
+		List<Sale> itemAndCategorySales = new ArrayList<Sale>();
+		if(this.getItemSales() != null) {
+			itemAndCategorySales.addAll(this.getItemSales());
+		}
+		if(this.getCategory().getCategorySales() != null) {
+			itemAndCategorySales.addAll(this.getCategory().getCategorySales());
+		}
+		return itemAndCategorySales;
 	}
 
 	public void setItemSales(List<Sale> itemSales) {
 		this.itemSales = itemSales;
 	}
 
-	public void addItemSale(Date startDate, Date endDate, double percentDiscount) {
-
+	public void addItemSale(Sale itemSale) {
+		// Database stuff here?
+		if (!itemSales.contains(itemSale)) {
+			itemSales.add(itemSale);
+		}
 	}
 
 	public Category getCategory() {
@@ -179,6 +237,10 @@ public class Item {
 			for (Object o : results) {
 				items.add((Item) o);
 			}
+			for (Item i: items) {
+				Hibernate.initialize(i.getItemSales());
+				Hibernate.initialize(i.getCategory().getCategorySales());
+			}
 			return items;
 		} finally {
 			session.close();
@@ -187,7 +249,7 @@ public class Item {
 	}
 
 	public static void main(String[] args) {
-		Session session = DatabaseManager.getInstance().getSession();
+		/*Session session = DatabaseManager.getInstance().getSession();
 
 		session.beginTransaction();
 
@@ -316,6 +378,65 @@ public class Item {
 		session.save(i2);
 
 		session.getTransaction().commit();
-		DatabaseManager.getInstance().getSessionFactory().close();
+		DatabaseManager.getInstance().getSessionFactory().close();*/
+		
+		Category cat5e = new Category();
+		
+		Item i2 = new Item();
+		i2.setCategory(cat5e);
+		i2.setSuggestedRetailPrice(4500.0f);
+		i2.setCurrentPrice(2200.0f);
+		i2.setInInventory(110);
+		i2.setNumStars(3);
+		i2.setTitle("Item 1");
+		i2.setSerial_no("1234");
+
+		Date today = new Date();
+		Date testDate1 = new GregorianCalendar(2017, Calendar.APRIL, 29).getTime();
+		Date testDate2 = new GregorianCalendar(2017, Calendar.APRIL, 28).getTime();
+		Date testDate3 = new GregorianCalendar(2017, Calendar.APRIL, 30).getTime();
+		Date testDate4 = new GregorianCalendar(2017, Calendar.MAY, 5).getTime();
+		
+		i2.setCurrentPriceSet(testDate2);
+		
+		System.out.println("Item's price is: " + i2.getCurrentPrice());
+		
+		Sale itemSale = new Sale();
+		itemSale.setStartDate(testDate2);
+		itemSale.setEndDate(testDate3);
+		itemSale.setPercentDiscount(30.0);
+		
+		// add itemSale to list of item sales. should be active
+		i2.addItemSale(itemSale);
+		i2.calculateCurrentPrice();
+
+		System.out.println("Sale added.");
+		System.out.println("Item's price is: " + i2.getCurrentPrice());
+		
+		Sale catSale = new Sale();
+		catSale.setStartDate(testDate3);
+		catSale.setEndDate(testDate4);
+		catSale.setPercentDiscount(40.0);
+		
+		cat5e.addCategorySale(catSale);
+		i2.calculateCurrentPrice();
+
+		System.out.println("Category sale added. Price shouldn't change");
+		System.out.println("Item's price is: " + i2.getCurrentPrice());
+		
+		Sale catSale2 = new Sale();
+		catSale2.setStartDate(testDate2);
+		catSale2.setEndDate(testDate4);
+		catSale2.setPercentDiscount(50.0);
+		
+		cat5e.addCategorySale(catSale2);
+		i2.calculateCurrentPrice();
+
+		System.out.println("Category sale added. Price should change");
+		System.out.println("Item's price is: " + i2.getCurrentPrice());
+
+		// print current price
+		// create item sale
+		//
 	}
 }
