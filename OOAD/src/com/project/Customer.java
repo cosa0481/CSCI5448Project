@@ -140,6 +140,9 @@ public class Customer extends Person {
 	 * @return
 	 */
 	public Customer loadCartItems() {
+		if(this.getCart() == null){
+			this.initalizeCart();
+		}
 		if (Hibernate.isInitialized(this.getCart().getItemCountMap())) {
 			return this;
 		}
@@ -172,10 +175,10 @@ public class Customer extends Person {
 		session.beginTransaction();
 
 		Customer c = new Customer();
-		c.setFirstName("Amit");
+		c.setFirstName("Sourabh");
 		c.setLastName("Gupta");
 		c.setUsername("aaaa");
-		c.setPassword("aaaa");
+		c.setPassword("bbbb");
 
 		session.save(c);
 		session.getTransaction().commit();

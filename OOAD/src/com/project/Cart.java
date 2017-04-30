@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -53,7 +54,7 @@ public class Cart {
 	boolean isReadyForCheckout;
 
 	public boolean isReadyForCheckout() {
-		if(itemCountMap == null || itemCountMap.size() == 0){
+		if (itemCountMap == null || itemCountMap.size() == 0) {
 			return false;
 		}
 		return true;
@@ -75,10 +76,10 @@ public class Cart {
 
 		Item selectedItem = null;
 
-		if(itemCountMap == null){
+		if (itemCountMap == null) {
 			itemCountMap = new HashMap<Item, Integer>();
 		}
-		
+
 		for (Item i : itemCountMap.keySet()) {
 			if (i.getId() == product.getId()) {
 				selectedItem = i;
@@ -101,9 +102,18 @@ public class Cart {
 		this.customer = customer;
 	}
 
-	// TODO
 	public float getCartValue() {
-		return 100;
+		if (!Hibernate.isInitialized(this.getItemCountMap())) {
+			return 0;
+		}
+		float val = 0;
+
+		for (Item i : this.getItemCountMap().keySet()) {
+			Integer quantity = this.getItemCountMap().get(i);
+			val += quantity * i.getCurrentPrice();
+		}
+
+		return val;
 	}
 
 }
