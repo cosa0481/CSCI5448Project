@@ -22,6 +22,9 @@ public class Utility {
 			return false;
 		}
 
+		if(accepted_valued.equals("na")){
+			return true;
+		}
 		String[] inputOptions = accepted_valued.split(",");
 
 		for (String inputOption : inputOptions) {
@@ -57,6 +60,6 @@ public class Utility {
 	 * @param msg
 	 */
 	public static void displayToScreen(String msg) {
-		System.out.println(msg);
+		System.out.println("\n"+msg);
 	}
 }

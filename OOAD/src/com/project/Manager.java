@@ -81,6 +81,7 @@ public class Manager {
 
 		processUserTypeInput(user_input);
 		Utility.displayToScreen("Bye");
+		DatabaseManager.getInstance().getSessionFactory().close();
 	}
 
 	private static void processUserTypeInput(String user_input) {
@@ -129,60 +130,69 @@ public class Manager {
 	private static void handleCustomer() {
 		Customer c = (Customer) loginUser(Customer.class);
 
-		Manager.getInstance().setCurrentUser(c);
+		while (true) {
 
-		if (c != null) {
-			System.out.println("Login succesful, Welcome " + c.getFirstName());
-
-			String input = Utility
-					.showPromptForInput(
-							"Please select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 0 to quit",
-							"0,1,2,3,4");
-
-			if (input.equals("1")) {
-				input = Utility.showPromptForInput("Enter keywod for search",
-						"");
-				List<Item> foundItems = Item.searchItems(input);
-				DisplayUtilities.displayItems(foundItems);
-			}
-			if (input.equals("2")) {
-				c.loadCartItems();
-				DisplayUtilities.displayCart();
-			}
-			if (input.equals("3")) {
-				DisplayUtilities.displayOrder();
-			}
-			if (input.equals("0")) {
-
-			}
-			if (input.equals("4")) {
-				String shipping = Utility
+			if (c != null) {
+				Manager.getInstance().setCurrentUser(c);
+				System.out.println("Login succesful, Welcome "
+						+ c.getFirstName());
+				String input = Utility
 						.showPromptForInput(
-								"Please select the shipping method\nPress 1 for Basic\nPress 2 for Deluxe\nPress 3 for Premium",
-								"1,2,3");
-				String payment = Utility
-						.showPromptForInput(
-								"Please select the payment method\nPress 1 for Card Payment\nPress 2 for Venmo",
-								"1,2");
-				
-				String shippingAddress = Utility
-						.showPromptForInput(
-								"Please enter shipping address",
-								"");
-				Cart cart = c.getCart();
+								"\n\nPlease select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 0 to quit",
+								"0,1,2,3,4");
 
-				if(cart == null){
-					Utility.displayToScreen("Your cart is empty");
-					return;
+				while (true) {
+
+					if (input.equals("1")) {
+						input = Utility.showPromptForInput(
+								"Enter keywod for search", "na");
+						List<Item> foundItems = Item.searchItems(input);
+						DisplayUtilities.displayItems(foundItems);
+					}
+					if (input.equals("2")) {
+						c.loadCartItems();
+						DisplayUtilities.displayCart();
+					}
+					if (input.equals("3")) {
+						DisplayUtilities.displayOrder();
+					}
+					if (input.equals("0")) {
+
+					}
+					if (input.equals("4")) {
+						String shipping = Utility
+								.showPromptForInput(
+										"Please select the shipping method\nPress 1 for Basic\nPress 2 for Deluxe\nPress 3 for Premium",
+										"1,2,3");
+						String payment = Utility
+								.showPromptForInput(
+										"Please select the payment method\nPress 1 for Card Payment\nPress 2 for Venmo",
+										"1,2");
+
+						String shippingAddress = Utility.showPromptForInput(
+								"Please enter shipping address", "na");
+						Cart cart = c.getCart();
+
+						if (cart == null) {
+							Utility.displayToScreen("Your cart is empty");
+							return;
+						}
+						Order customer_order = c.checkout(shipping, payment,
+								shippingAddress);
+						// DisplayUtilities.displayOrder();
+
+					}
+					input = Utility
+							.showPromptForInput(
+									"\n\nPlease select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 0 to quit",
+									"0,1,2,3,4");
 				}
-				Order customer_order = c.checkout(shipping, payment,shippingAddress);
-				//DisplayUtilities.displayOrder();
 
-			
+			} else {
+				System.out.println("\n\nIncorrect Login, Please try again");
+				c = (Customer) loginUser(Customer.class);
 			}
 
-		} else {
-			System.out.println("Incorrect Login, Please try again");
 		}
 	}
 
@@ -197,6 +207,9 @@ public class Manager {
 				"Please enter userName and Password separatedby whitespace!",
 				"");
 		String[] login_credentials = credentials.split(" ");
+		if (login_credentials.length < 2) {
+			return null;
+		}
 		return Person.login(login_credentials[0], login_credentials[1], c);
 	}
 

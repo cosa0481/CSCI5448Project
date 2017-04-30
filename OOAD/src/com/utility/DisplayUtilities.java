@@ -48,8 +48,10 @@ public class DisplayUtilities {
 			return;
 		}
 		System.out.println(foundItems.size() + " items found");
+		StringBuilder allowedInput = new StringBuilder("");
 
 		for (int i = 0; i < foundItems.size(); i++) {
+			allowedInput.append((i + 1) + ",");
 			System.out.println("Item #" + (i + 1) + "\t");
 			System.out.print("Title:\t" + foundItems.get(i).getTitle() + "\t");
 			System.out.print("Price:\t" + foundItems.get(i).getCurrentPrice()
@@ -58,12 +60,12 @@ public class DisplayUtilities {
 		}
 
 		String input = Utility.showPromptForInput(
-				"Enter the Item# to view an item", "");
+				"Enter the Item# to view an item", allowedInput.toString());
 		int item_no = Integer.parseInt(input);
 
 		while ((item_no > foundItems.size()) || (item_no < 0)) {
 			input = Utility.showPromptForInput(
-					"Enter the Item# to view an item", "");
+					"Enter the Item# to view an item", "1");
 			item_no = Integer.parseInt(input);
 		}
 		displayItem(foundItems.get(item_no - 1));
@@ -81,7 +83,7 @@ public class DisplayUtilities {
 
 		System.out.println();
 		String input = Utility.showPromptForInput(
-				"Press 1 to add item to cart", "");
+				"Press 1 to add item to cart\nPress 2 to return", "1,2");
 
 		int parsed_input = Integer.parseInt(input);
 
@@ -91,22 +93,19 @@ public class DisplayUtilities {
 
 			if (currentUser instanceof Customer) {
 				Customer c = (Customer) currentUser;
-				
+
 				Cart cart;
-			
-				
-				if(c.getCart() == null){
+
+				if (c.getCart() == null) {
 					c.initalizeCart();
-				}else{
+				} else {
 					c = c.loadCartItems();
 				}
-				displayCart();
 
 				c.getCart().modifyCart(item, 1);
 			}
 			Utility.displayToScreen("The item has been succesfully added");
 
-			displayCart();
 		}
 	}
 
@@ -115,14 +114,14 @@ public class DisplayUtilities {
 		Customer c = (Customer) person;
 		Cart cart = c.getCart();
 
-		if(cart == null){
+		if (cart == null) {
 			c.initalizeCart();
 			cart = c.getCart();
 		}
-		
+
 		Map<Item, Integer> items = cart.getItemCountMap();
 
-		if (items == null  || items.size() == 0) {
+		if (items == null || items.size() == 0) {
 			Utility.displayToScreen("Your cart is empty!");
 			return;
 		}
@@ -140,20 +139,25 @@ public class DisplayUtilities {
 
 	public static CreditCardDAO displayCreditCardPrompt(
 			List<CreditCardDAO> creditCardDetails) {
+
+		StringBuilder allowedInput = new StringBuilder("");
+
 		for (int i = 0; i < creditCardDetails.size(); i++) {
 			System.out.println("Card #" + (i + 1) + "\t");
+			allowedInput.append((i + 1) + ",");
 			System.out.print("Card No:\t"
 					+ creditCardDetails.get(i).getCreditCardNumber() + "\t");
 			System.out.println();
 		}
 
 		String input = Utility.showPromptForInput(
-				"Enter the Card# to select a card", "");
+				"Enter the Card# to select a card", allowedInput.toString());
 		int card_no = Integer.parseInt(input);
 
 		while ((card_no > creditCardDetails.size()) || (card_no < 0)) {
-			input = Utility.showPromptForInput(
-					"Enter the Card# to select a card", "");
+			input = Utility
+					.showPromptForInput("Enter the Card# to select a card",
+							allowedInput.toString());
 			card_no = Integer.parseInt(input);
 		}
 

@@ -87,8 +87,8 @@ public class Customer extends Person {
 			customer.getCart().getItemCountMap().clear();
 			s.saveOrUpdate(customer.getCart());
 			s.getTransaction().commit();
+			s.clear();;
 		}
-
 		s.close();
 
 		return o;
@@ -139,7 +139,7 @@ public class Customer extends Person {
 			if (c.getCart() != null) {
 				Map<Item, Integer> items = c.getCart().getItemCountMap();
 				if (items != null) {
-					System.out.println(items.size());
+					items.size();
 					Manager.getInstance().setCurrentUser(c);
 				}
 			}
