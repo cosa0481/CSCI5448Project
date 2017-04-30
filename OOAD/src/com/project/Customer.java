@@ -1,5 +1,6 @@
 package com.project;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,18 +41,25 @@ public class Customer extends Person {
 	private Cart cart;
 
 	@Transient
-	private List<Order> user_orders;
+	private HashMap<Integer, Order> user_orders = new HashMap<>();
 
-	public void setUser_orders(List<Order> user_orders) {
+	public void setUser_orders(HashMap<Integer, Order> user_orders) {
 		this.user_orders = user_orders;
 	}
 
-	public List<Order> getOrders() {
-		return user_orders;
+	public void addOrder(Order order) {
+		if (!user_orders.containsKey(order.getOrderID())) {
+			user_orders.put(order.getOrderID(), order);
+		}
 	}
 
-	public void addOrder(Order order) {
+	public Collection<Order> getOrders() {
+		if (user_orders == null) {
+			user_orders = new HashMap<>();
+		}
+		return user_orders.values();
 	}
+
 
 	public Order checkout(String shipping, String payment,
 			String shippingAddress) {
@@ -90,8 +98,8 @@ public class Customer extends Person {
 		paymentMethod.initializePaymentDetails();
 
 		if (paymentMethod.processPayment(o)) {
-			s.save(o);
-			//customer.getOrders().add(o);
+			System.out.println(s.save(o).toString());
+			customer.addOrder(o);
 			// DatabaseManager.getInstance().saveOrUpdate(o);
 			customer.getCart().getItemCountMap().clear();
 			s.saveOrUpdate(customer.getCart());

@@ -44,7 +44,7 @@ public class Order {
 
 	@Column(name = "SHIPPINGADDRESS")
 	private String shippingAddress;
-	
+
 	public void getOrderInfo() {
 		// TODO
 	}
@@ -117,9 +117,6 @@ public class Order {
 	 */
 	public static List<Order> getOrderForCustomer(Customer customer) {
 
-		if(customer.getOrders() != null){
-			return customer.getOrders();
-		}
 		Session session = null;
 		List<Order> orders = new ArrayList<>();
 		try {
@@ -130,9 +127,8 @@ public class Order {
 			List<Object> user_orders = cri.list();
 
 			for (Object o : user_orders) {
-				orders.add((Order) o);
+				customer.addOrder((Order) o);
 			}
-			customer.setUser_orders(orders);
 			return orders;
 		} finally {
 			session.close();

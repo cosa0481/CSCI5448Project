@@ -1,10 +1,10 @@
 package com.utility;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Date;
 import java.util.Scanner;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -21,9 +21,12 @@ import com.project.Sale;
 public class DisplayUtilities {
 
 	public static void displayOrder() {
-		List<Order> orders = Order.getOrderForCustomer((Customer) Manager
-				.getInstance().getCurrentUser());
+		
+		Customer c = ((Customer) Manager.getInstance().getCurrentUser());
+		Order.getOrderForCustomer(c);
+		Collection<Order> orders = c.getOrders();
 
+		Object[] user_orders = orders.toArray();
 		if (orders.size() == 0) {
 			Utility.displayToScreen("User has not placed any order");
 			return;
@@ -31,14 +34,14 @@ public class DisplayUtilities {
 		System.out.println("You have total " + orders.size() + " orders");
 
 		for (int i = 0; i < orders.size(); i++) {
+			Order o = (Order) user_orders[i];
 			System.out.println("Printing details of order#" + (i + 1));
-			System.out.println("Order date: " + orders.get(i).getOrder_date());
-			System.out.println("Order Value: " + orders.get(i).getOrderValue());
-			System.out.println("Order address: "
-					+ orders.get(i).getShippingAddress());
+			System.out.println("Order date: " + o.getOrder_date());
+			System.out.println("Order Value: " + o.getOrderValue());
+			System.out.println("Order address: " + o.getShippingAddress());
 
 			StringBuilder itemList = new StringBuilder("");
-			for (Item item : orders.get(i).getOrder_items()) {
+			for (Item item : o.getOrder_items()) {
 				itemList.append(item.getTitle() + ",");
 			}
 			String itemString = itemList.toString();
@@ -170,7 +173,7 @@ public class DisplayUtilities {
 
 		return creditCardDetails.get(card_no - 1);
 	}
-	
+
 	public static void displayItemsToAddSale(List<Item> foundItems) {
 		if (foundItems.size() == 0) {
 			Utility.displayToScreen("Your search returned zero results.");
@@ -186,8 +189,9 @@ public class DisplayUtilities {
 			System.out.println();
 		}
 
-			String input = Utility.showPromptForInput(
-				"Enter the item number for the item you wish to put on sale", "");
+		String input = Utility.showPromptForInput(
+				"Enter the item number for the item you wish to put on sale",
+				"");
 
 		int item_no = Integer.parseInt(input);
 
@@ -198,22 +202,23 @@ public class DisplayUtilities {
 		}
 		displayItemForSale(foundItems.get(item_no - 1));
 	}
-	
+
 	public static void displayItemForSale(Item item) {
 		System.out.println("Item details:");
 
 		System.out.println("Title:\t\t" + item.getTitle());
 		System.out.println("Category:\t" + item.getCategory().getName());
 		System.out.println("Inventory:\t" + item.getInInventory());
-		System.out.println("Retail Price:\t" + item.getSuggestedRetailPrice() + "\t");
+		System.out.println("Retail Price:\t" + item.getSuggestedRetailPrice()
+				+ "\t");
 
 		System.out.println();
-		String input = Utility.showPromptForInput(
-				"Press 1 to schedule a sale", "");
+		String input = Utility.showPromptForInput("Press 1 to schedule a sale",
+				"");
 
 		int parsed_input = Integer.parseInt(input);
 
-		if (parsed_input == 1) {			
+		if (parsed_input == 1) {
 			// new Sale
 			// input for start date
 			// input for end date
@@ -232,7 +237,7 @@ public class DisplayUtilities {
 			try {
 				startDate = formatter.parse(input);
 				newSale.setStartDate(startDate);
-			}catch(ParseException ex){
+			} catch (ParseException ex) {
 				System.out.println("did not parse start date");
 			}
 			input = Utility.showPromptForInput(
@@ -242,7 +247,7 @@ public class DisplayUtilities {
 			try {
 				endDate = formatter.parse(input);
 				newSale.setEndDate(endDate);
-			}catch(ParseException ex){
+			} catch (ParseException ex) {
 				System.out.println("did not parse end date");
 			}
 
@@ -250,20 +255,21 @@ public class DisplayUtilities {
 					"Enter percentage discount for sale", "");
 			// make it a float or double or w/e
 			// set it as percent discount
-			//discount = (double) input;
+			// discount = (double) input;
 			Scanner s = new Scanner(input);
 			discount = s.nextDouble();
 			newSale.setPercentDiscount(discount);
 			s.close();
 			item.addItemSale(newSale);
-			if(newSale.isSaleActive()) {
+			if (newSale.isSaleActive()) {
 				item.calculateCurrentPrice();
 				System.out.println("Sale is active, calculating price");
-				System.out.println("Current price is " + item.getCurrentPrice());
+				System.out
+						.println("Current price is " + item.getCurrentPrice());
 			}
 			Utility.displayToScreen("The sale has been scheduled!");
-			
-			//displayCart();
+
+			// displayCart();
 		}
 	}
 }
