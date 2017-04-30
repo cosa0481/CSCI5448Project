@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 import javax.xml.crypto.Data;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -38,8 +39,15 @@ public class Customer extends Person {
 	@OneToOne(mappedBy = "customer", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	private Cart cart;
 
+	@Transient
+	private List<Order> user_orders;
+
+	public void setUser_orders(List<Order> user_orders) {
+		this.user_orders = user_orders;
+	}
+
 	public List<Order> getOrders() {
-		return null;
+		return user_orders;
 	}
 
 	public void addOrder(Order order) {
@@ -83,11 +91,11 @@ public class Customer extends Person {
 
 		if (paymentMethod.processPayment(o)) {
 			s.save(o);
+			//customer.getOrders().add(o);
 			// DatabaseManager.getInstance().saveOrUpdate(o);
 			customer.getCart().getItemCountMap().clear();
 			s.saveOrUpdate(customer.getCart());
 			s.getTransaction().commit();
-			s.clear();;
 		}
 		s.close();
 
@@ -124,8 +132,10 @@ public class Customer extends Person {
 	 * @return
 	 */
 	public Customer loadCartItems() {
+		if (Hibernate.isInitialized(this.getCart().getItemCountMap())) {
+			return this;
+		}
 		Session session = null;
-
 		try {
 			session = DatabaseManager.getInstance().getSession();
 
@@ -135,7 +145,6 @@ public class Customer extends Person {
 			List<Object> listOfCustomer = criteria.list();
 
 			Customer c = (Customer) listOfCustomer.get(0);
-
 			if (c.getCart() != null) {
 				Map<Item, Integer> items = c.getCart().getItemCountMap();
 				if (items != null) {

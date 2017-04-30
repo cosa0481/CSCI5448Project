@@ -186,6 +186,7 @@ public class Manager {
 							.showPromptForInput(
 									"\n\nPlease select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 0 to quit",
 									"0,1,2,3,4");
+					c = (Customer) Manager.getInstance().getCurrentUser();
 				}
 
 			} else {

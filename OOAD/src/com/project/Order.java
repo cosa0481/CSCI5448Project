@@ -44,7 +44,7 @@ public class Order {
 
 	@Column(name = "SHIPPINGADDRESS")
 	private String shippingAddress;
-
+	
 	public void getOrderInfo() {
 		// TODO
 	}
@@ -117,12 +117,13 @@ public class Order {
 	 */
 	public static List<Order> getOrderForCustomer(Customer customer) {
 
+		if(customer.getOrders() != null){
+			return customer.getOrders();
+		}
 		Session session = null;
 		List<Order> orders = new ArrayList<>();
-
 		try {
 			session = DatabaseManager.getInstance().getSession();
-
 			Criteria cri = session.createCriteria(Order.class);
 			cri.add(Restrictions.eq("customer", customer));
 			cri.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
@@ -131,6 +132,7 @@ public class Order {
 			for (Object o : user_orders) {
 				orders.add((Order) o);
 			}
+			customer.setUser_orders(orders);
 			return orders;
 		} finally {
 			session.close();
