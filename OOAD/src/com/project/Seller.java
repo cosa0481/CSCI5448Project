@@ -44,4 +44,19 @@ public class Seller extends Person {
 	public void addSale(Sale sale, Item product) {
 		
 	}
+	public static void main(String[] args) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		Session session = sessionFactory.getCurrentSession();
+		//start transaction
+		session.beginTransaction();
+		
+		Seller s= new Seller();
+		s.setFirstName("seller");
+		s.setLastName("seller");
+		s.setUsername("seller");
+		s.setPassword("seller");
+		session.save(s);
+		session.getTransaction().commit();
+		sessionFactory.close();
+	}
 }
