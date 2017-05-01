@@ -195,6 +195,10 @@ public class Item {
 
 	public List<Sale> getAllSales() {
 		// database stuff?
+		Session s = DatabaseManager.getInstance().getSession();
+		s.refresh(this);
+		s.refresh(this.getCategory());
+		
 		List<Sale> itemAndCategorySales = new ArrayList<Sale>();
 		if(this.getItemSales() != null) {
 			itemAndCategorySales.addAll(this.getItemSales());
@@ -202,6 +206,8 @@ public class Item {
 		if(this.getCategory().getCategorySales() != null) {
 			itemAndCategorySales.addAll(this.getCategory().getCategorySales());
 		}
+		
+		DatabaseManager.getInstance().closeSession();
 		return itemAndCategorySales;
 	}
 
@@ -209,11 +215,20 @@ public class Item {
 		this.itemSales = itemSales;
 	}
 
-	public void addItemSale(Sale itemSale) {
-		// Database stuff here?
-		if (!itemSales.contains(itemSale)) {
-			itemSales.add(itemSale);
+	public void addItemSale(Sale itemSale) {		
+		Session s = DatabaseManager.getInstance().getSession();
+		s.beginTransaction();
+		s.save(itemSale);
+		s.refresh(this);
+		
+		if(!this.getItemSales().contains(itemSale)) {
+			this.getItemSales().add(itemSale);
 		}
+		
+		s.saveOrUpdate(this);
+		
+		s.getTransaction().commit();
+		DatabaseManager.getInstance().closeSession();
 	}
 
 	public Category getCategory() {
@@ -248,6 +263,7 @@ public class Item {
 				items.add((Item) o);
 			}
 			for (Item i: items) {
+				session.refresh(i);
 				Hibernate.initialize(i.getItemSales());
 				Hibernate.initialize(i.getCategory().getCategorySales());
 			}
