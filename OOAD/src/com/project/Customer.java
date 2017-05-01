@@ -178,16 +178,16 @@ public class Customer extends Person {
 		c.setPassword("cosa");
 		
 		Customer m = new Customer();
-		c.setFirstName("Mike");
-		c.setLastName("Gore");
-		c.setUsername("migo");
-		c.setPassword("migo");
+		m.setFirstName("Mike");
+		m.setLastName("Gore");
+		m.setUsername("migo");
+		m.setPassword("migo");
 		
 		Customer r = new Customer();
-		c.setFirstName("Rohit");
-		c.setLastName("Gupta");
-		c.setUsername("rogu");
-		c.setPassword("rogu");
+		r.setFirstName("Rohit");
+		r.setLastName("Gupta");
+		r.setUsername("rogu");
+		r.setPassword("rogu");
 
 		session.save(c);
 		session.save(m);
