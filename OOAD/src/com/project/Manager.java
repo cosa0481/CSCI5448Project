@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
+
 import com.project.PaymentMethodFactory.Payment_Method;
 import com.utility.DisplayUtilities;
 import com.utility.Utility;
@@ -198,8 +200,8 @@ public class Manager {
 						+ c.getFirstName());
 				String input = Utility
 						.showPromptForInput(
-								"\n\nPlease select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 0 to quit",
-								"0,1,2,3,4");
+								"\n\nPlease select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 5 to add credit card\nPress 0 to quit",
+								"0,1,2,3,4,5");
 
 				while (true) {
 
@@ -244,10 +246,35 @@ public class Manager {
 						// DisplayUtilities.displayLog("Order");
 
 					}
+					if (input.equals("5")) {
+						CreditCardDAO new_card = new CreditCardDAO();
+						String cc_name = Utility
+								.showPromptForInput("Enter the name on the card", "na");
+						String cc_number = Utility
+								.showPromptForInput("Enter credit card number", "na");
+						String cc_exp = Utility
+								.showPromptForInput("Enter expiration date", "na");
+						String cc_ccv = Utility
+								.showPromptForInput("Enter CCV code", "na");
+						String cc_addr = Utility
+								.showPromptForInput("Enter billing address name", "na");
+						new_card.setCustomer(c);
+						new_card.setName(cc_name);
+						new_card.setCreditCardNumber(cc_number);
+						new_card.setCcv(Integer.parseInt(cc_ccv));
+						new_card.setExpirationDate(cc_exp);
+						new_card.setBillingAddress(cc_addr);
+						
+						Session s = DatabaseManager.getInstance().getSession();
+						s.beginTransaction();
+						s.save(new_card);
+						s.getTransaction().commit();
+						DatabaseManager.getInstance().closeSession();
+					}
 					input = Utility
 							.showPromptForInput(
-									"\n\nPlease select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 0 to quit",
-									"0,1,2,3,4");
+									"\n\nPlease select one of the options\nPress 1 for search\nPress 2 to view cart\nPress 3 for Order History\nPress 4 to checkout\nPress 5 to add credit card\nPress 0 to quit",
+									"0,1,2,3,4,5");
 					c = (Customer) Manager.getInstance().getCurrentUser();
 				}
 
