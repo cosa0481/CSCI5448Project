@@ -176,8 +176,22 @@ public class Customer extends Person {
 		c.setLastName("Sandford");
 		c.setUsername("cosa");
 		c.setPassword("cosa");
+		
+		Customer m = new Customer();
+		c.setFirstName("Mike");
+		c.setLastName("Gore");
+		c.setUsername("migo");
+		c.setPassword("migo");
+		
+		Customer r = new Customer();
+		c.setFirstName("Rohit");
+		c.setLastName("Gupta");
+		c.setUsername("rogu");
+		c.setPassword("rogu");
 
 		session.save(c);
+		session.save(m);
+		session.save(r);
 		session.getTransaction().commit();
 		session.close();
 		session.getSessionFactory().close();
