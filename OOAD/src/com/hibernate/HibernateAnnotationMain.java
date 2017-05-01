@@ -99,6 +99,7 @@ public class HibernateAnnotationMain {
 		
 		Item i = new Item();
 		i.setCategory(category);
+		i.setSuggestedRetailPrice(50.0f);
 		i.setCurrentPrice(50.0f);
 		i.setInInventory(10);
 		i.setNumStars(3);
@@ -108,6 +109,7 @@ public class HibernateAnnotationMain {
 
 		Item i2 = new Item();
 		i2.setCategory(category);
+		i2.setSuggestedRetailPrice(50.0f);
 		i2.setCurrentPrice(50.0f);
 		i2.setInInventory(10);
 		i2.setNumStars(3);
@@ -206,6 +208,7 @@ public class HibernateAnnotationMain {
 
 		Item i = new Item();
 		i.setCategory(category1);
+		i.setSuggestedRetailPrice(50.0f);
 		i.setCurrentPrice(50.0f);
 		i.setInInventory(10);
 		i.setNumStars(3);
@@ -215,6 +218,7 @@ public class HibernateAnnotationMain {
 
 		Item i2 = new Item();
 		i2.setCategory(category2);
+		i2.setSuggestedRetailPrice(50.0f);
 		i2.setCurrentPrice(50.0f);
 		i2.setInInventory(10);
 		i2.setNumStars(3);
