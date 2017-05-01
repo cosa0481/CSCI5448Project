@@ -249,14 +249,12 @@ public class HibernateAnnotationMain {
 		Review r1 = new Review();
 		r1.setNumStars(4);
 		r1.setPostContent("review for book");
-		r1.setReviewer(c);
 		r1.setCreatedDate(new Date());
 		session.save(r1);
 
 		Review r2 = new Review();
 		r2.setNumStars(3);
 		r2.setPostContent("review for book");
-		r2.setReviewer(c);
 		r2.setCreatedDate(new Date());
 		session.save(r2);
 
@@ -270,7 +268,6 @@ public class HibernateAnnotationMain {
 		Review r3 = new Review();
 		r3.setNumStars(3);
 		r3.setPostContent("review for phone");
-		r3.setReviewer(c);
 		r3.setCreatedDate(new Date());
 		session.save(r3);
 

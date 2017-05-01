@@ -111,10 +111,6 @@ public class Customer extends Person {
 		return o;
 	}
 
-	public void writeReview(Item product, Review review) {
-		product.addReview(review);
-	}
-
 	public Membership getMembership() {
 		return membership;
 	}
@@ -176,10 +172,10 @@ public class Customer extends Person {
 		session.beginTransaction();
 
 		Customer c = new Customer();
-		c.setFirstName("Sourabh");
-		c.setLastName("Gupta");
-		c.setUsername("aaaa");
-		c.setPassword("bbbb");
+		c.setFirstName("Corin");
+		c.setLastName("Sandford");
+		c.setUsername("cosa");
+		c.setPassword("cosa");
 
 		session.save(c);
 		session.getTransaction().commit();

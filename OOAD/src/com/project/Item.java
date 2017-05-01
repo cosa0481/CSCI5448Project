@@ -81,8 +81,18 @@ public class Item {
 		this.numStars = numStars;
 	}
 
-	public void addReview(Review review) {
-		reviews.add(review);
+	public void addReview(Review review) {		
+		Session s = DatabaseManager.getInstance().getSession();
+		s.beginTransaction();
+		s.save(review);
+		s.refresh(this);
+		
+		this.getReviews().add(review);
+		
+		s.saveOrUpdate(this);
+		
+		s.getTransaction().commit();
+		DatabaseManager.getInstance().closeSession();
 	}
 	
 	public void calculateCurrentPrice() {
@@ -249,26 +259,27 @@ public class Item {
 	}
 
 	public static void main(String[] args) {
-		/*Session session = DatabaseManager.getInstance().getSession();
+		Session session = DatabaseManager.getInstance().getSession();
 
 		session.beginTransaction();
 
-		Region region1 = new Region();
-		region1.setState("CA");
-		region1.setTitle("UCLA");
-		region1.setZipcode(80301);
-		session.save(region1);
+//		Region region1 = new Region();
+//		region1.setState("CA");
+//		region1.setTitle("UCLA");
+//		region1.setZipcode(80301);
+//		session.save(region1);
+//
+//		Region region2 = new Region();
+//		region2.setState("CA");
+//		region2.setTitle("USC");
+//		region2.setZipcode(80302);
+//		session.save(region2);
 
-		Region region2 = new Region();
-		region2.setState("CA");
-		region2.setTitle("USC");
-		region2.setZipcode(80302);
-		session.save(region2);
-
-		Shipping shippping1 = new Shipping();
-		shippping1.setShippingCost(50);
-		shippping1.setShippingDays(15);
-		session.save(shippping1);
+		Shipping shipping1 = new Shipping();
+		shipping1.setShippingCost(50);
+		shipping1.setShippingDays(15);
+		shipping1.setShippingMethod("1");
+		session.save(shipping1);
 
 		Category category1 = new Category();
 		category1.setName("console");
@@ -378,62 +389,62 @@ public class Item {
 		session.save(i2);
 
 		session.getTransaction().commit();
-		DatabaseManager.getInstance().getSessionFactory().close();*/
+		DatabaseManager.getInstance().getSessionFactory().close();
 		
-		Category cat5e = new Category();
-		
-		Item i2 = new Item();
-		i2.setCategory(cat5e);
-		i2.setSuggestedRetailPrice(4500.0f);
-		i2.setCurrentPrice(2200.0f);
-		i2.setInInventory(110);
-		i2.setNumStars(3);
-		i2.setTitle("Item 1");
-		i2.setSerial_no("1234");
-
-		Date today = new Date();
-		Date testDate1 = new GregorianCalendar(2017, Calendar.APRIL, 29).getTime();
-		Date testDate2 = new GregorianCalendar(2017, Calendar.APRIL, 28).getTime();
-		Date testDate3 = new GregorianCalendar(2017, Calendar.APRIL, 30).getTime();
-		Date testDate4 = new GregorianCalendar(2017, Calendar.MAY, 5).getTime();
-		
-		i2.setCurrentPriceSet(testDate2);
-		
-		System.out.println("Item's price is: " + i2.getCurrentPrice());
-		
-		Sale itemSale = new Sale();
-		itemSale.setStartDate(testDate2);
-		itemSale.setEndDate(testDate3);
-		itemSale.setPercentDiscount(30.0);
-		
-		// add itemSale to list of item sales. should be active
-		i2.addItemSale(itemSale);
-		i2.calculateCurrentPrice();
-
-		System.out.println("Sale added.");
-		System.out.println("Item's price is: " + i2.getCurrentPrice());
-		
-		Sale catSale = new Sale();
-		catSale.setStartDate(testDate3);
-		catSale.setEndDate(testDate4);
-		catSale.setPercentDiscount(40.0);
-		
-		cat5e.addCategorySale(catSale);
-		i2.calculateCurrentPrice();
-
-		System.out.println("Category sale added. Price shouldn't change");
-		System.out.println("Item's price is: " + i2.getCurrentPrice());
-		
-		Sale catSale2 = new Sale();
-		catSale2.setStartDate(testDate2);
-		catSale2.setEndDate(testDate4);
-		catSale2.setPercentDiscount(50.0);
-		
-		cat5e.addCategorySale(catSale2);
-		i2.calculateCurrentPrice();
-
-		System.out.println("Category sale added. Price should change");
-		System.out.println("Item's price is: " + i2.getCurrentPrice());
+//		Category cat5e = new Category();
+//		
+//		Item i2 = new Item();
+//		i2.setCategory(cat5e);
+//		i2.setSuggestedRetailPrice(4500.0f);
+//		i2.setCurrentPrice(2200.0f);
+//		i2.setInInventory(110);
+//		i2.setNumStars(3);
+//		i2.setTitle("Item 1");
+//		i2.setSerial_no("1234");
+//
+//		Date today = new Date();
+//		Date testDate1 = new GregorianCalendar(2017, Calendar.APRIL, 29).getTime();
+//		Date testDate2 = new GregorianCalendar(2017, Calendar.APRIL, 28).getTime();
+//		Date testDate3 = new GregorianCalendar(2017, Calendar.APRIL, 30).getTime();
+//		Date testDate4 = new GregorianCalendar(2017, Calendar.MAY, 5).getTime();
+//		
+//		i2.setCurrentPriceSet(testDate2);
+//		
+//		System.out.println("Item's price is: " + i2.getCurrentPrice());
+//		
+//		Sale itemSale = new Sale();
+//		itemSale.setStartDate(testDate2);
+//		itemSale.setEndDate(testDate3);
+//		itemSale.setPercentDiscount(30.0);
+//		
+//		// add itemSale to list of item sales. should be active
+//		i2.addItemSale(itemSale);
+//		i2.calculateCurrentPrice();
+//
+//		System.out.println("Sale added.");
+//		System.out.println("Item's price is: " + i2.getCurrentPrice());
+//		
+//		Sale catSale = new Sale();
+//		catSale.setStartDate(testDate3);
+//		catSale.setEndDate(testDate4);
+//		catSale.setPercentDiscount(40.0);
+//		
+//		cat5e.addCategorySale(catSale);
+//		i2.calculateCurrentPrice();
+//
+//		System.out.println("Category sale added. Price shouldn't change");
+//		System.out.println("Item's price is: " + i2.getCurrentPrice());
+//		
+//		Sale catSale2 = new Sale();
+//		catSale2.setStartDate(testDate2);
+//		catSale2.setEndDate(testDate4);
+//		catSale2.setPercentDiscount(50.0);
+//		
+//		cat5e.addCategorySale(catSale2);
+//		i2.calculateCurrentPrice();
+//
+//		System.out.println("Category sale added. Price should change");
+//		System.out.println("Item's price is: " + i2.getCurrentPrice());
 
 		// print current price
 		// create item sale

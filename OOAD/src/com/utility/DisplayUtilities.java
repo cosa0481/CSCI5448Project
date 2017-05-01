@@ -24,6 +24,7 @@ import com.project.LogEntry;
 import com.project.Manager;
 import com.project.Order;
 import com.project.Person;
+import com.project.Review;
 import com.project.Sale;
 
 public class DisplayUtilities {
@@ -98,10 +99,12 @@ public class DisplayUtilities {
 		System.out.println("Rating:\t\t" + item.getNumStars());
 		System.out.println("Inventory:\t" + item.getInInventory());
 		System.out.println("Price:\t\t" + item.getCurrentPrice() + "\t");
+		System.out.println("Reviews:");
+		DisplayUtilities.displayReviews(item);
 
 		System.out.println();
 		String input = Utility.showPromptForInput(
-				"Press 1 to add item to cart\nPress 2 to return", "1,2");
+				"Press 1 to add item to cart\nPress 2 for leave review\nPress 3 to return", "1,2,3");
 
 		int parsed_input = Integer.parseInt(input);
 
@@ -124,6 +127,22 @@ public class DisplayUtilities {
 			}
 			Utility.displayToScreen("The item has been succesfully added");
 
+		} else if(parsed_input == 2) {
+			Review review = new Review();
+			review.setCreatedDate(new Date());
+			input = Utility.showPromptForInput("Enter number of stars for review",
+					"0,1,2,3,4,5");
+			int parsed_user_input = Integer.parseInt(input);
+			while(parsed_user_input < 0 || parsed_user_input > 5) {
+				input = Utility.showPromptForInput("Enter number of stars for review",
+						"0,1,2,3,4,5");
+				parsed_user_input = Integer.parseInt(input);
+			}
+			review.setNumStars(parsed_user_input);
+			
+			input = Utility.showPromptForInput("Enter review text", "na");
+			review.setPostContent(input);
+			item.addReview(review);
 		}
 	}
 
@@ -179,7 +198,6 @@ public class DisplayUtilities {
 			}
 			c.getCart().modifyCart(itemList.get(parsed_user_input-1), -1);
 		}
-
 	}
 
 	public static CreditCardDAO displayCreditCardPrompt(
@@ -324,10 +342,27 @@ public class DisplayUtilities {
 		s.close();
 		
 		System.out.println(type 
-				+ " Log:\tTimestamp\tEntry\n---------\t---------\t-----");
+				+ " Log:\tTimestamp : Entry\n---------\t--------- : -----");
 		for(LogEntry entry : log_entries) {
 			System.out.println(entry.log_date + " : " + entry.log_entry);
 		}
 		System.out.println("End " + type + " Log\n");
 	}
+	
+	public static void displayReviews(Item item) {
+		Session s = DatabaseManager.getInstance().getSession();
+		s.beginTransaction();
+		
+		s.refresh(item);
+		
+		for(Review r : item.getReviews()) {
+			System.out.println("\tStars: " + r.getNumStars());
+			System.out.println("\t" + r.getPostContent());
+			System.out.println("\tCreated:" + r.getCreatedDate());
+			
+		}
+		
+		DatabaseManager.getInstance().closeSession();
+	}
 }
+

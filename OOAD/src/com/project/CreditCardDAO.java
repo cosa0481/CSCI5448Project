@@ -123,10 +123,10 @@ public class CreditCardDAO {
 
 		session.beginTransaction();
 
-		Customer c = (Customer) session.get(Customer.class, 5);
+		Customer c = (Customer) session.get(Customer.class, 1);
 
 		CreditCardDAO creditCard = new CreditCardDAO();
-		creditCard.setBillingAddress("billing address");
+		creditCard.setBillingAddress("Other Address");
 		creditCard.setCcv(323);
 		
 		creditCard.setCreditCardNumber("112243445566752");
@@ -135,7 +135,7 @@ public class CreditCardDAO {
 		session.save(creditCard);
 
 		creditCard = new CreditCardDAO();
-		creditCard.setBillingAddress("billing address");
+		creditCard.setBillingAddress("My Address");
 		creditCard.setCcv(133);
 		creditCard.setCreditCardNumber("223333445566752");
 		creditCard.setCustomer(c);

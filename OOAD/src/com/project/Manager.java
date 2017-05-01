@@ -1,5 +1,6 @@
 package com.project;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,12 +69,20 @@ public class Manager {
 	static private void generateInvoice(Order order) {
 
 	}
+	
+	public void initializeObservers() {
+		observers = new ArrayList<Subscriber>();
+		new UserSubscriber();
+		new ItemSubscriber();
+		new OrderSubscriber();
+	}
 
 	// Main function
 	public static void main(String[] args) {
 
 		Utility.showPromptForInput(
 				"Welcome to Marketplace. Press any key to continue", "");
+		Manager.getInstance().initializeObservers();
 		String user_input = Utility
 				.showPromptForInput(
 						"Please select user type\nPress 1 for Customer\nPress 2 for Seller\nPress 3 for Administrator",
@@ -162,9 +171,6 @@ public class Manager {
 	 */
 	private static void handleCustomer() {
 		Customer c = (Customer) loginUser(Customer.class);
-		observers.add(new UserSubscriber());
-		observers.add(new ItemSubscriber());
-		observers.add(new OrderSubscriber());
 
 		while (true) {
 
@@ -217,6 +223,7 @@ public class Manager {
 						Order customer_order = c.checkout(shipping, payment,
 								shippingAddress);
 						// DisplayUtilities.displayOrder();
+						// DisplayUtilities.displayLog("Order");
 
 					}
 					input = Utility

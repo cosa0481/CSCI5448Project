@@ -12,10 +12,6 @@ public class Review {
 	@Column(name="review_id", nullable=false, unique=true)
 	private int reviewId;
 	
-	@ManyToOne
-	@JoinColumn(name="customer_id", nullable=false)
-	private Customer reviewer;
-	
 	@Column(name="DATE")
 	@Temporal(TemporalType.DATE)
 	private Date createdDate;
@@ -31,12 +27,6 @@ public class Review {
 	}
 	public void setReviewId(int reviewId) {
 		this.reviewId = reviewId;
-	}
-	public Customer getReviewer() {
-		return reviewer;
-	}
-	public void setReviewer(Customer reviewer) {
-		this.reviewer = reviewer;
 	}
 	public Date getCreatedDate() {
 		return createdDate;
