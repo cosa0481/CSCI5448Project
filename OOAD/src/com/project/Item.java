@@ -325,31 +325,31 @@ public class Item {
 
 		i = new Item();
 		i.setCategory(category1);
-		i.setSuggestedRetailPrice(150.0f);
-		i.setCurrentPrice(150.0f);
+		i.setSuggestedRetailPrice(100.0f);
+		i.setCurrentPrice(100.0f);
 		i.setInInventory(10);
 		i.setNumStars(3);
-		i.setTitle("playstation 4");
+		i.setTitle("PlayStation 4");
 		i.setSerial_no("1234");
 		session.save(i);
 
 		i = new Item();
 		i.setCategory(category1);
-		i.setSuggestedRetailPrice(75.0f);
-		i.setCurrentPrice(75.0f);
+		i.setSuggestedRetailPrice(100.0f);
+		i.setCurrentPrice(100.0f);
 		i.setInInventory(10);
 		i.setNumStars(3);
-		i.setTitle("playstation 3");
+		i.setTitle("PlayStation 3");
 		i.setSerial_no("1234");
 		session.save(i);
 
 		i = new Item();
 		i.setCategory(category1);
-		i.setSuggestedRetailPrice(15.0f);
-		i.setCurrentPrice(15.0f);
+		i.setSuggestedRetailPrice(100.0f);
+		i.setCurrentPrice(100.0f);
 		i.setInInventory(10);
 		i.setNumStars(3);
-		i.setTitle("playstation 2");
+		i.setTitle("PlayStation 2");
 		i.setSerial_no("1234");
 		session.save(i);
 
