@@ -98,7 +98,7 @@ public class Customer extends Person {
 		paymentMethod.initializePaymentDetails();
 
 		if (paymentMethod.processPayment(o)) {
-			System.out.println(s.save(o).toString());
+			s.save(o);
 			customer.addOrder(o);
 			Manager.getInstance().logOrder(o);
 			// DatabaseManager.getInstance().saveOrUpdate(o);
