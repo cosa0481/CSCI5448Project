@@ -264,6 +264,7 @@ public class DisplayUtilities {
 		System.out.println("Inventory:\t" + item.getInInventory());
 		System.out.println("Retail Price:\t" + item.getSuggestedRetailPrice()
 				+ "\t");
+		System.out.println("Current Price:\t" + item.getCurrentPrice() + "\t");
 
 		System.out.println();
 		String input = Utility.showPromptForInput("Press 1 to schedule a sale",
