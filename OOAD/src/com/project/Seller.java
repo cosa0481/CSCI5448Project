@@ -6,6 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.hibernate.HibernateUtil;
+
 @Entity
 @Table(name="seller")
 public class Seller extends Person {
