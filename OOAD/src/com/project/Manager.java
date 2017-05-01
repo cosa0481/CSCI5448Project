@@ -114,6 +114,23 @@ public class Manager {
 
 		if (a != null) {
 			System.out.println("Login succesful, Welcome " + a.getFirstName());
+			
+			String input = Utility
+					.showPromptForInput(
+							"Please select one of the options\nPress 1 to add a category sale\nPress 2 to return an item\nPress 0 to quit",
+							"0,1,2");
+			if (input.equals("1")) {
+				input = Utility.showPromptForInput("Search for a category:",
+						"na");
+				List<Category> foundCategories = Category.searchCategories(input);
+				DisplayUtilities.displayCategories(foundCategories);
+			} else if (input.equals("2")) {
+				System.out.println("Not yet implemented");
+			} else if (input.equals("0")) {
+				System.exit(0);
+			}
+
+
 		} else {
 			System.out.println("Incorrect Login, Please try again");
 		}
@@ -135,6 +152,7 @@ public class Manager {
 							"0,1,2,3");
 
 			if (input.equals("1")) {
+				System.out.println("Not yet implemented.");
 				input = Utility.showPromptForInput("Enter name of item to add:",
 						"");
 				// show categories, prompt for input?
@@ -187,7 +205,7 @@ public class Manager {
 
 					if (input.equals("1")) {
 						input = Utility.showPromptForInput(
-								"Enter keywod for search", "na");
+								"Enter keyword for search", "na");
 						List<Item> foundItems = Item.searchItems(input);
 						DisplayUtilities.displayItems(foundItems);
 					}

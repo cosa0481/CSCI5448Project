@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -26,6 +27,7 @@ import com.project.Order;
 import com.project.Person;
 import com.project.Review;
 import com.project.Sale;
+import com.project.Category;
 
 public class DisplayUtilities {
 
@@ -378,9 +380,122 @@ public class DisplayUtilities {
 				System.out.println("End date: \t" + s.getEndDate());
 				System.out.println("Discount: \t" + s.getPercentDiscount() + "%");
 			}
+		}	
+	}
+	
+	public static void displayCategories(List<Category> foundCategories) {
+		if (foundCategories.size() == 0) {
+			Utility.displayToScreen("Your search returned zero results.");
+			return;
 		}
-		
+		System.out.println(foundCategories.size() + " items found");
+		StringBuilder allowedInput = new StringBuilder("");
+
+		for (int i = 0; i < foundCategories.size(); i++) {
+			allowedInput.append((i + 1) + ",");
+			System.out.println("Category #" + (i + 1) + "\t");
+			System.out.print("Name:\t" + foundCategories.get(i).getName() + "\t");
+			System.out.println();
+		}
+
+		String input = Utility.showPromptForInput(
+				"Enter the Category # for category", allowedInput.toString());
+		int item_no = Integer.parseInt(input);
+
+		while ((item_no > foundCategories.size()) || (item_no < 0)) {
+			input = Utility.showPromptForInput(
+					"Enter the Category # to view a category", "1");
+			item_no = Integer.parseInt(input);
+		}
+		displayCategoryForSale(foundCategories.get(item_no - 1));
 	}
 
+	public static void displayCategoryForSale(Category category) {
+		System.out.println("Category details:");
+
+		System.out.println("Name:\t\t" + category.getName());
+
+		System.out.println();
+		String input = Utility.showPromptForInput("Press 1 to schedule a sale",
+				"");
+
+		int parsed_input = Integer.parseInt(input);
+
+		if (parsed_input == 1) {
+			Session session = DatabaseManager.getInstance().getSession();
+			session.refresh(category);
+
+			displayCategorySales(category);
+			Sale newSale = new Sale();
+			Date startDate;
+			Date endDate;
+			double discount;
+			DateFormat formatter = new SimpleDateFormat("yyyy-M-d");
+			input = Utility.showPromptForInput(
+					"Enter start date of sale in format: 2014-12-15", "");
+			// make it a date
+			// set it as start date
+			try {
+				startDate = formatter.parse(input);
+				newSale.setStartDate(startDate);
+			} catch (ParseException ex) {
+				System.out.println("did not parse start date");
+			}
+			input = Utility.showPromptForInput(
+					"Enter end date of sale in format: 2014-12-25", "");
+			// make it a date
+			// set it as end date
+			try {
+				endDate = formatter.parse(input);
+				newSale.setEndDate(endDate);
+			} catch (ParseException ex) {
+				System.out.println("did not parse end date");
+			}
+
+			input = Utility.showPromptForInput(
+					"Enter percentage discount for sale", "");
+			// make it a float or double or w/e
+			// set it as percent discount
+			// discount = (double) input;
+			Scanner s = new Scanner(input);
+			discount = s.nextDouble();
+			newSale.setPercentDiscount(discount);
+			s.close();
+			category.addCategorySale(newSale);
+			Utility.displayToScreen("The sale has been scheduled!");
+			if (newSale.isSaleActive()) {
+				// find all items in a category!				
+				Criteria cri = session.createCriteria(Item.class);
+				cri.add(Restrictions.eq("category.id", category.getCategory_id()));
+				List<Object> results = cri.list();
+				List<Item> items = new ArrayList();
+
+				for (Object o : results) {
+					items.add((Item) o);
+				}
+				for (Item i: items) {
+					i.calculateCurrentPrice();
+				}
+				System.out.println("Updated sale prices for all items in category");
+			}
+
+			//DatabaseManager.getInstance().closeSession();
+		}
+	}
+	
+	public static void displayCategorySales(Category category) {
+		System.out.println("Existing sales:");
+		List<Sale> sales = category.getCategorySales();
+		if(sales.isEmpty()){
+			System.out.println("None");
+		} else {
+			for(Sale s: sales) {
+				System.out.println("Start date: \t" + s.getStartDate());
+				System.out.println("End date: \t" + s.getEndDate());
+				System.out.println("Discount: \t" + s.getPercentDiscount() + "%");
+			}
+		}	
+	}
+	
 }
 

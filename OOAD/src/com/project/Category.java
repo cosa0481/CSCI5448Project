@@ -14,6 +14,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -57,8 +62,40 @@ public class Category {
 	}
 
 	public void addCategorySale(Sale catSale) {
+		Session s = DatabaseManager.getInstance().getSession();
+		s.beginTransaction();
+		s.save(catSale);
+		s.refresh(this);
+		
 		if (!categorySales.contains(catSale)) {
 			categorySales.add(catSale);
 		}
+		
+		s.saveOrUpdate(this);
+		
+		s.getTransaction().commit();
+		DatabaseManager.getInstance().closeSession();
+	}
+	
+	public static List<Category> searchCategories(String keyword) {
+
+		Session session = null;
+		List<Category> categories = new ArrayList<>();
+
+		try {
+			session = DatabaseManager.getInstance().getSession();
+
+			Criteria cri = session.createCriteria(Category.class);
+			cri.add(Restrictions.ilike("name", "%" + keyword + "%"));
+			List<Object> results = cri.list();
+
+			for (Object o : results) {
+				categories.add((Category) o);
+			}
+			return categories;
+		} finally {
+			session.close();
+		}
+
 	}
 }
