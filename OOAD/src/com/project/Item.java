@@ -96,6 +96,10 @@ public class Item {
 	}
 	
 	public void calculateCurrentPrice() {
+		Session s = DatabaseManager.getInstance().getSession();
+		s.beginTransaction();
+		s.refresh(this);
+	
 		// use this method to calculate and store a current
 		// price, and store the date it was set.
 		float max_discount = 0.0f;
@@ -118,6 +122,10 @@ public class Item {
 		this.setCurrentPrice(this.getSuggestedRetailPrice() * (1 - max_discount));		
 		Date today = new Date();
 		this.setCurrentPriceSet(today);
+		
+		s.saveOrUpdate(this);		
+		s.getTransaction().commit();
+		//DatabaseManager.getInstance().closeSession();
 	}
 
 	public float getCurrentPrice() {
