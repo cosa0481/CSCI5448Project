@@ -278,6 +278,7 @@ public class DisplayUtilities {
 			// input for discount %
 			// if sale is valid, recalculate item price
 			// database? we'll see
+			displayItemSales(item);
 			Sale newSale = new Sale();
 			Date startDate;
 			Date endDate;
@@ -364,5 +365,21 @@ public class DisplayUtilities {
 		
 		DatabaseManager.getInstance().closeSession();
 	}
+	
+	public static void displayItemSales(Item item) {
+		System.out.println("Existing sales:");
+		List<Sale> allSales = item.getAllSales();
+		if(allSales.isEmpty()){
+			System.out.println("None");
+		} else {
+			for(Sale s: allSales) {
+				System.out.println("Start date: \t" + s.getStartDate());
+				System.out.println("End date: \t" + s.getEndDate());
+				System.out.println("Discount: \t" + s.getPercentDiscount() + "%");
+			}
+		}
+		
+	}
+
 }
 
